@@ -1,0 +1,20 @@
+C:\Users\Chutich\source\repos\TotalCommander\Total Commander\bin\Debug\Total Commander.exe.config
+C:\Users\Chutich\source\repos\TotalCommander\Total Commander\bin\Debug\Total Commander.exe
+C:\Users\Chutich\source\repos\TotalCommander\Total Commander\bin\Debug\Total Commander.pdb
+C:\Users\Chutich\source\repos\TotalCommander\Total Commander\obj\Debug\Total Commander.csprojAssemblyReference.cache
+C:\Users\Chutich\source\repos\TotalCommander\Total Commander\obj\Debug\Total_Commander.Form1.resources
+C:\Users\Chutich\source\repos\TotalCommander\Total Commander\obj\Debug\Total_Commander.Properties.Resources.resources
+C:\Users\Chutich\source\repos\TotalCommander\Total Commander\obj\Debug\Total Commander.csproj.GenerateResource.cache
+C:\Users\Chutich\source\repos\TotalCommander\Total Commander\obj\Debug\Total Commander.csproj.CoreCompileInputs.cache
+C:\Users\Chutich\source\repos\TotalCommander\Total Commander\obj\Debug\Total Commander.exe
+C:\Users\Chutich\source\repos\TotalCommander\Total Commander\obj\Debug\Total Commander.pdb
+C:\Users\Chutich\Desktop\c4w-17clc1-1753036\TotalCommander\Total Commander\obj\Debug\Total Commander.csprojAssemblyReference.cache
+C:\Users\Chutich\Desktop\c4w-17clc1-1753036\TotalCommander\Total Commander\obj\Debug\Total_Commander.Form1.resources
+C:\Users\Chutich\Desktop\c4w-17clc1-1753036\TotalCommander\Total Commander\obj\Debug\Total_Commander.Properties.Resources.resources
+C:\Users\Chutich\Desktop\c4w-17clc1-1753036\TotalCommander\Total Commander\obj\Debug\Total Commander.csproj.GenerateResource.cache
+C:\Users\Chutich\Desktop\c4w-17clc1-1753036\TotalCommander\Total Commander\obj\Debug\Total Commander.csproj.CoreCompileInputs.cache
+C:\Users\Chutich\Desktop\c4w-17clc1-1753036\TotalCommander\Total Commander\obj\Debug\Total Commander.exe
+C:\Users\Chutich\Desktop\c4w-17clc1-1753036\TotalCommander\Total Commander\obj\Debug\Total Commander.pdb
+C:\Users\Chutich\Desktop\c4w-17clc1-1753036\TotalCommander\Total Commander\bin\Debug\Total Commander.exe.config
+C:\Users\Chutich\Desktop\c4w-17clc1-1753036\TotalCommander\Total Commander\bin\Debug\Total Commander.exe
+C:\Users\Chutich\Desktop\c4w-17clc1-1753036\TotalCommander\Total Commander\bin\Debug\Total Commander.pdb
