@@ -256,7 +256,9 @@
             this.lv_left_view.TabIndex = 0;
             this.lv_left_view.UseCompatibleStateImageBehavior = false;
             this.lv_left_view.View = System.Windows.Forms.View.Details;
-            this.lv_left_view.SelectedIndexChanged += new System.EventHandler(this.lv_left_view_SelectedIndexChanged);
+            this.lv_left_view.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.lv_left_view_AfterLabelEdit);
+            this.lv_left_view.BeforeLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.lv_left_view_BeforeLabelEdit);
+            this.lv_left_view.Click += new System.EventHandler(this.lv_left_view_Click);
             this.lv_left_view.DoubleClick += new System.EventHandler(this.lv_left_view_DoubleClick);
             this.lv_left_view.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lv_left_view_Click);
             // 
@@ -272,7 +274,9 @@
             this.lv_right_view.TabIndex = 1;
             this.lv_right_view.UseCompatibleStateImageBehavior = false;
             this.lv_right_view.View = System.Windows.Forms.View.Details;
-            this.lv_right_view.SelectedIndexChanged += new System.EventHandler(this.lv_right_view_SelectedIndexChanged);
+            this.lv_right_view.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.lv_right_view_AfterLabelEdit);
+            this.lv_right_view.BeforeLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.lv_right_view_BeforeLabelEdit);
+            this.lv_right_view.Click += new System.EventHandler(this.lv_right_view_Click);
             this.lv_right_view.DoubleClick += new System.EventHandler(this.lv_right_view_DoubleClick);
             this.lv_right_view.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lv_right_view_Click);
             // 
@@ -422,7 +426,7 @@
             this.deleteToolStripMenuItem1,
             this.renameToolStripMenuItem});
             this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(181, 202);
+            this.mainMenu.Size = new System.Drawing.Size(135, 180);
             // 
             // viewToolStripMenuItem1
             // 
@@ -457,7 +461,7 @@
             // newFolderToolStripMenuItem1
             // 
             this.newFolderToolStripMenuItem1.Name = "newFolderToolStripMenuItem1";
-            this.newFolderToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.newFolderToolStripMenuItem1.Size = new System.Drawing.Size(134, 22);
             this.newFolderToolStripMenuItem1.Text = "New Folder";
             this.newFolderToolStripMenuItem1.Click += new System.EventHandler(this.newFolderToolStripMenuItem1_Click);
             // 

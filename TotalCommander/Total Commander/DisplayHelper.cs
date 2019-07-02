@@ -17,14 +17,16 @@ namespace Total_Commander
         private Label driveInfo;
         private TextBox addrBar;
         private ListView filesView;
+        private ContextMenuStrip menu;
 
-        public DisplayHelper(FileManager fm, ComboBox cb, Label lb, TextBox tb, ListView lv)
+        public DisplayHelper(FileManager fm, ComboBox cb, Label lb, TextBox tb, ListView lv, ContextMenuStrip m)
         {
             fileMan = fm;
             driveOptions = cb;
             driveInfo = lb;
             addrBar = tb;
             filesView = lv;
+            menu = m;
 
             imageList.Images.Add(Icon.ExtractAssociatedIcon("folder.ico"));
             imageList.ColorDepth = ColorDepth.Depth32Bit;
@@ -140,6 +142,36 @@ namespace Total_Commander
             {
                 AddFilesViewItem(file);
             }
+        }
+
+        public void Refresh()
+        {
+            UpdateDriveInfo();
+            UpdateAddrBar();
+            UpdateFilesView();
+        }
+
+        public void ShowMenu(Point point)
+        {
+            var indices = filesView.SelectedIndices;
+
+            if (indices.Count == 0)
+            {
+                for (int i = 0; i < menu.Items.Count; ++i)
+                {
+                    menu.Items[i].Enabled = false;
+                }
+
+                menu.Items[5].Enabled = true;
+            }
+            else
+            {
+                for (int i = 0; i < menu.Items.Count; ++i)
+                {
+                    menu.Items[i].Enabled = true;
+                }
+            }
+            menu.Show(point);
         }
     }
 }

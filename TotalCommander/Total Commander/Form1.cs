@@ -18,6 +18,8 @@ namespace Total_Commander
         private DisplayHelper rightHelper;
         private FileManager leftFileMan;
         private FileManager rightFileMan;
+        private string beforeLabelEditString;
+        private string afterLabelEditString;
         private bool leftFocused;
 
         public Form1()
@@ -35,14 +37,16 @@ namespace Total_Commander
                 cb_left_drives,
                 lb_left_info,
                 tb_left_addressbar,
-                lv_left_view);
+                lv_left_view,
+                mainMenu);
 
             rightHelper = new DisplayHelper(
                 rightFileMan,
                 cb_right_drives,
                 lb_right_info,
                 tb_right_addressbar,
-                lv_right_view);
+                lv_right_view,
+                mainMenu);
 
             cb_right_drives.SelectedIndex = 0;
             cb_left_drives.SelectedIndex = 0;
@@ -85,8 +89,7 @@ namespace Total_Commander
             var item = lv_left_view.SelectedItems[0];
 
             leftFileMan.OpenChildFileOrDir(item.Text);
-            leftHelper.UpdateFilesView();
-            leftHelper.UpdateAddrBar();
+            leftHelper.Refresh();
         }
 
         private void lv_right_view_DoubleClick(object sender, EventArgs e)
@@ -94,8 +97,7 @@ namespace Total_Commander
             var item = lv_right_view.SelectedItems[0];
 
             rightFileMan.OpenChildFileOrDir(item.Text);
-            rightHelper.UpdateFilesView();
-            rightHelper.UpdateAddrBar();
+            rightHelper.Refresh();
         }
 
         private void change_View(View v)
@@ -125,23 +127,12 @@ namespace Total_Commander
             change_View(View.Details);
         }
 
-        private void lv_left_view_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            leftFocused = true;
-        }
-
-        private void lv_right_view_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            leftFocused = false;
-        }
-
         private void tb_left_addressbar_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 leftFileMan.OpenDir(tb_left_addressbar.Text);
-                leftHelper.UpdateFilesView();
-                leftHelper.UpdateAddrBar();
+                leftHelper.Refresh();
             }
         }
 
@@ -150,8 +141,7 @@ namespace Total_Commander
             if (e.KeyCode == Keys.Enter)
             {
                 rightFileMan.OpenDir(tb_right_addressbar.Text);
-                rightHelper.UpdateFilesView();
-                rightHelper.UpdateAddrBar();
+                rightHelper.Refresh();
             }
         }
 
@@ -162,14 +152,23 @@ namespace Total_Commander
 
         private void newFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            if (leftFocused)
+            {
+                leftFileMan.NewFolder();
+                leftHelper.Refresh();
+            }
+            else
+            {
+                rightFileMan.NewFolder();
+                rightHelper.Refresh();
+            }
         }
 
         private void lv_left_view_Click(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
-                
+                leftHelper.ShowMenu(MousePosition);
             }
         }
 
@@ -177,13 +176,80 @@ namespace Total_Commander
         {
             if (e.Button == MouseButtons.Right)
             {
-                
+                rightHelper.ShowMenu(MousePosition);
             }
         }
 
         private void newFolderToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            if (leftFocused)
+            {
+                leftFileMan.NewFolder();
+                leftHelper.Refresh();
+            }
+            else
+            {
+                rightFileMan.NewFolder();
+                rightHelper.Refresh();
+            }
+        }
 
+        private void lv_left_view_AfterLabelEdit(object sender, LabelEditEventArgs e)
+        {
+            if (e.Label == null)
+            {
+                return;
+            }
+
+            afterLabelEditString = e.Label.ToString();
+
+            if (afterLabelEditString.Length == 0)
+            {
+                return;
+            }
+
+            leftFileMan.RenameChild(beforeLabelEditString, afterLabelEditString);
+            leftFileMan.OpenDir(tb_left_addressbar.Text);
+            leftHelper.Refresh();
+        }
+
+        private void lv_left_view_BeforeLabelEdit(object sender, LabelEditEventArgs e)
+        {
+            beforeLabelEditString = lv_left_view.SelectedItems[0].Text;
+        }
+
+        private void lv_right_view_AfterLabelEdit(object sender, LabelEditEventArgs e)
+        {
+            if (e.Label == null)
+            {
+                return;
+            }
+
+            afterLabelEditString = e.Label.ToString();
+
+            if (afterLabelEditString.Length == 0)
+            {
+                return;
+            }
+
+            rightFileMan.RenameChild(beforeLabelEditString, afterLabelEditString);
+            rightFileMan.OpenDir(tb_right_addressbar.Text);
+            rightHelper.Refresh();
+        }
+
+        private void lv_right_view_BeforeLabelEdit(object sender, LabelEditEventArgs e)
+        {
+            beforeLabelEditString = lv_right_view.SelectedItems[0].Text;
+        }
+
+        private void lv_left_view_Click(object sender, EventArgs e)
+        {
+            leftFocused = true;
+        }
+
+        private void lv_right_view_Click(object sender, EventArgs e)
+        {
+            leftFocused = false;
         }
     }
 }

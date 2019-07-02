@@ -113,6 +113,58 @@ namespace Total_Commander
             MessageBox.Show("Directory not found");
         }
 
+        public void NewFolder()
+        {
+            string path = CurrentDir.FullName;
+
+            if (CurrentDir != CurrentDrive.RootDirectory)
+            {
+                path = path + '\\';
+            }
+
+            MessageBox.Show(path + "New folder");
+
+            if (Directory.Exists(path) == false)
+            {
+                Directory.CreateDirectory(path);
+            }
+        }
+
+        public void RenameChild(string name, string newname)
+        {
+            if (name == newname)
+            {
+                return;
+            }
+
+            var dirs = GetDirectories();
+            var files = GetFiles();
+            var path = CurrentDir.FullName;
+
+            if (CurrentDir != CurrentDrive.RootDirectory)
+            {
+                path = path + '\\';
+            }
+            //MessageBox.Show(name + ' ' + newname);
+            foreach (DirectoryInfo dir in dirs)
+            {
+                if (dir.Name == name)
+                {
+                    Directory.Move(path + name, path + newname);
+                    return;
+                }
+            }
+
+            foreach (FileInfo fil in files)
+            {
+                if (fil.Name == name)
+                {
+                    File.Move(path + name, path + newname);
+                    return;
+                }
+            }
+        }
+
         public DirectoryInfo[] GetDirectories()
         {
             var dirs = CurrentDir.GetDirectories();
