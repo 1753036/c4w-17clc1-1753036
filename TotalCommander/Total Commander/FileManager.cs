@@ -130,38 +130,44 @@ namespace Total_Commander
             }
         }
 
-        public void RenameChild(string name, string newname)
+        public void Rename(int index, string name, string newname)
         {
-            if (name == newname)
+            if (name == newname || newname == "")
             {
                 return;
             }
 
-            var dirs = GetDirectories();
-            var files = GetFiles();
-            var path = CurrentDir.FullName;
+            var parentPath = CurrentDir.FullName;
+            var src = Path.Combine(parentPath, name);
+            var dest = Path.Combine(parentPath, newname);
 
-            if (CurrentDir != CurrentDrive.RootDirectory)
+            Move(index, src, dest);
+        }
+
+        public void Move(int index, string src, string dest)
+        {
+            if (src == "" || dest == "")
             {
-                path = path + '\\';
-            }
-            //MessageBox.Show(name + ' ' + newname);
-            foreach (DirectoryInfo dir in dirs)
-            {
-                if (dir.Name == name)
-                {
-                    Directory.Move(path + name, path + newname);
-                    return;
-                }
+                return;
             }
 
-            foreach (FileInfo fil in files)
+            var folders = GetDirectories();
+
+            if (index < folders.Length)
             {
-                if (fil.Name == name)
+                if (Directory.Exists(dest) == false)
                 {
-                    File.Move(path + name, path + newname);
-                    return;
+                    Directory.Move(src, dest);
                 }
+                return;
+            }
+            else
+            {
+                if (File.Exists(dest) == false)
+                {
+                    File.Move(src, dest);
+                }
+                return;
             }
         }
 
