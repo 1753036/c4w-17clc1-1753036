@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -115,24 +116,27 @@ namespace Total_Commander
 
         public void Delete(string item)
         {
+            // @FIXME: delete recursive
             string path = Path.Combine(CurrentDir.FullName, item);
-            try
-            {
-                Directory.Delete(path);
-            }
-            catch
-            {
-
-            }
-
-            try
+            if (File.Exists(path))
             {
                 File.Delete(path);
+                return;
             }
-            catch
-            {
 
+            var files = Directory.GetFiles(path);
+            foreach (var f in files)
+            {
+                File.Delete(f);
             }
+
+            var folders = Directory.GetDirectories(path);
+            foreach (var f in folders)
+            {
+                Delete(f);
+            }
+
+            Directory.Delete(path);
         }
 
         public void NewFolder()
@@ -156,16 +160,36 @@ namespace Total_Commander
             return Move(src, dest);
         }
 
-        public bool Copy(string name, string newname)
+        public void Copy(string src, string dest)
         {
-            return false;
+            if (File.Exists(src))
+            {
+                File.Copy(src, dest);
+                return;
+            }
+
+            if (Directory.Exists(dest) == false)
+            {
+                Directory.CreateDirectory(dest);
+            }
+
+            var files = Directory.GetFiles(src);
+            foreach (var f in files)
+            {
+                string name = Path.GetFileName(f);
+                File.Copy(f, Path.Combine(dest, name));
+            }
+
+            var folders = Directory.GetDirectories(src);
+            foreach (var f in folders)
+            {
+                string name = Path.GetFileName(f);
+                //MessageBox.Show(Path.Combine(dest, name));
+                Copy(f, Path.Combine(dest, name));
+            }
         }
-
-        public bool Move(string src, string dest)
+        public bool MoveTheSameDrive(string src, string dest)
         {
-            MessageBox.Show("KHong the move accross volume!!!");
-            var folders = GetDirectories();
-
             if (Directory.Exists(src) && !Directory.Exists(dest))
             {
                 Directory.Move(src, dest);
@@ -175,6 +199,25 @@ namespace Total_Commander
             if (File.Exists(src) && !File.Exists(dest))
             {
                 File.Move(src, dest);
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool Move(string src, string dest)
+        {
+            //MessageBox.Show("KHong the move accross volume!!!");
+            var folders = GetDirectories();
+
+            if (Path.GetPathRoot(src) == Path.GetPathRoot(dest))
+            {
+                return MoveTheSameDrive(src, dest);
+            }
+            else
+            {
+                Copy(src, dest);
+                Delete(src);
                 return true;
             }
 

@@ -64,29 +64,36 @@ namespace Total_Commander
         private void pasteContextMenu_Click(object sender, EventArgs e)
         {
             // @FIXME
-            string srcDir = cutClipboard[0];
-            string destDir = currentFileMan.CurrentDir.FullName;
-
-            foreach (var item in cutClipboard)
+            if (cutClipboard.Count >= 1)
             {
-                if (item != srcDir)
+                string srcDir = cutClipboard[0];
+                string destDir = currentFileMan.CurrentDir.FullName;
+
+                foreach (var item in cutClipboard)
                 {
-                    string src = Path.Combine(srcDir, item);
-                    string dest = Path.Combine(destDir, item);
-                    MessageBox.Show(src + " Move to " + dest);
-                    //currentFileMan.Move(src, dest);
+                    if (item != srcDir)
+                    {
+                        string src = Path.Combine(srcDir, item);
+                        string dest = Path.Combine(destDir, item);
+                        //MessageBox.Show(src + " Move to " + dest);
+                        currentFileMan.Move(src, dest);
+                    }
                 }
             }
-
-            srcDir = copyClipboard[0];
-
-            foreach (var item in copyClipboard)
+            else if (copyClipboard.Count >= 1)
             {
-                if (item != srcDir)
+                string srcDir = copyClipboard[0];
+                string destDir = currentFileMan.CurrentDir.FullName;
+
+                foreach (var item in copyClipboard)
                 {
-                    string src = Path.Combine(srcDir, item);
-                    string dest = Path.Combine(destDir, item);
-                    MessageBox.Show(src + " Copy to " + dest);
+                    if (item != srcDir)
+                    {
+                        string src = Path.Combine(srcDir, item);
+                        string dest = Path.Combine(destDir, item);
+                        MessageBox.Show(src + " Copy to " + dest);
+                        currentFileMan.Copy(src, dest);
+                    }
                 }
             }
 
