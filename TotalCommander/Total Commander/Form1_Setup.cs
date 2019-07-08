@@ -17,25 +17,25 @@ namespace Total_Commander
 
             leftHelper = new DisplayHelper(
                 leftFileMan,
-                cb_left_drives,
-                lb_left_info,
-                tb_left_addressbar,
+                leftComboBox,
+                leftLabelInfo,
+                leftAddressBar,
                 lv_left_view,
                 contextMenu);
 
             rightHelper = new DisplayHelper(
                 rightFileMan,
-                cb_right_drives,
-                lb_right_info,
-                tb_right_addressbar,
+                rightComboBox,
+                rightLabelInfo,
+                rightAddressBar,
                 lv_right_view,
                 contextMenu);
 
             currentFileMan = leftFileMan;
             currentHelper = leftHelper;
 
-            cb_right_drives.SelectedIndex = 0;
-            cb_left_drives.SelectedIndex = 0;
+            rightComboBox.SelectedIndex = 0;
+            leftComboBox.SelectedIndex = 0;
         }
     }
 }

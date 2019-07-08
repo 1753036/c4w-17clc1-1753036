@@ -8,15 +8,16 @@ namespace Total_Commander
 {
     public partial class Form1
     {
-        private void cb_left_drives_SelectedIndexChanged(object sender, EventArgs e)
+
+        private void leftComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            leftFileMan.OpenDrive(cb_left_drives.SelectedIndex);
+            leftFileMan.OpenDrive(leftComboBox.SelectedIndex);
             leftHelper.UpdateDriveInfo();
         }
 
-        private void cb_right_drives_SelectedIndexChanged(object sender, EventArgs e)
+        private void rightComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            rightFileMan.OpenDrive(cb_right_drives.SelectedIndex);
+            rightFileMan.OpenDrive(rightComboBox.SelectedIndex);
             rightHelper.UpdateDriveInfo();
         }
     }

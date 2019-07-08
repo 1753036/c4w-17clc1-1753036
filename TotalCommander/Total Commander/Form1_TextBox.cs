@@ -9,34 +9,34 @@ namespace Total_Commander
 {
     public partial class Form1
     {
-        private void tb_left_addressbar_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                leftFileMan.OpenDir(tb_left_addressbar.Text);
-                leftHelper.Refresh();
-            }
-        }
-
-        private void tb_right_addressbar_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                rightFileMan.OpenDir(tb_right_addressbar.Text);
-                rightHelper.Refresh();
-            }
-        }
-
-        private void tb_addressbar_Click(object sender, MouseEventArgs e)
+        private void AddressBar_Click(object sender, MouseEventArgs e)
         {
             TextBox tb = (TextBox)sender;
             tb.ReadOnly = false;
         }
 
-        private void tb_addressbar_Leave(object sender, EventArgs e)
+        private void AddressBar_Leave(object sender, EventArgs e)
         {
             TextBox tb = (TextBox)sender;
             tb.ReadOnly = true;
+        }
+
+        private void rightAddressBar_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                rightFileMan.OpenDir(rightAddressBar.Text);
+                rightHelper.Refresh();
+            }
+        }
+
+        private void leftAddressBar_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                leftFileMan.OpenDir(leftAddressBar.Text);
+                leftHelper.Refresh();
+            }
         }
     }
 }

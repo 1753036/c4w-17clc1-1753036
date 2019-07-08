@@ -113,62 +113,72 @@ namespace Total_Commander
             MessageBox.Show("Directory not found");
         }
 
+        public void Delete(string item)
+        {
+            string path = Path.Combine(CurrentDir.FullName, item);
+            try
+            {
+                Directory.Delete(path);
+            }
+            catch
+            {
+
+            }
+
+            try
+            {
+                File.Delete(path);
+            }
+            catch
+            {
+
+            }
+        }
+
         public void NewFolder()
         {
-            string path = CurrentDir.FullName;
+            string path = Path.Combine(CurrentDir.FullName,"New Folder");
 
-            if (CurrentDir != CurrentDrive.RootDirectory)
+            for (int i = 1; Directory.Exists(path); ++i)
             {
-                path = path + '\\';
+                path = Path.Combine(CurrentDir.FullName, "New Folder (" + i.ToString() +")");
             }
 
-            MessageBox.Show(path + "New folder");
-
-            if (Directory.Exists(path) == false)
-            {
-                Directory.CreateDirectory(path);
-            }
+            //MessageBox.Show(path);
+            Directory.CreateDirectory(path);
         }
 
-        public void Rename(int index, string name, string newname)
+        public bool Rename(string name, string newname)
         {
-            if (name == newname || newname == "")
-            {
-                return;
-            }
-
-            var parentPath = CurrentDir.FullName;
-            var src = Path.Combine(parentPath, name);
-            var dest = Path.Combine(parentPath, newname);
-
-            Move(index, src, dest);
+            var parent = CurrentDir.FullName;
+            var src = Path.Combine(parent, name);
+            var dest = Path.Combine(parent, newname);
+            return Move(src, dest);
         }
 
-        public void Move(int index, string src, string dest)
+        public bool Copy(string name, string newname)
         {
-            if (src == "" || dest == "")
-            {
-                return;
-            }
+            return false;
+        }
 
+        public bool Move(string src, string dest)
+        {
+            MessageBox.Show("KHong the move accross volume!!!");
             var folders = GetDirectories();
 
-            if (index < folders.Length)
+            if (Directory.Exists(src) && !Directory.Exists(dest))
             {
-                if (Directory.Exists(dest) == false)
-                {
-                    Directory.Move(src, dest);
-                }
-                return;
+                Directory.Move(src, dest);
+                return true;
             }
-            else
+
+            if (File.Exists(src) && !File.Exists(dest))
             {
-                if (File.Exists(dest) == false)
-                {
-                    File.Move(src, dest);
-                }
-                return;
+                File.Move(src, dest);
+                return true;
             }
+
+            return false;
         }
 
         public DirectoryInfo[] GetDirectories()

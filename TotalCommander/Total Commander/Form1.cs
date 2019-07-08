@@ -38,7 +38,7 @@ namespace Total_Commander
             rightHelper.Refresh();
         }
 
-        private void lv_view_DoubleClick(object sender, EventArgs e)
+        private void ListView_DoubleClick(object sender, EventArgs e)
         {
             var item = currentListView.SelectedItems[0];
 
@@ -46,23 +46,7 @@ namespace Total_Commander
             currentHelper.Refresh();
         }
 
-        private void lv_left_view_Click(object sender, EventArgs e)
-        {
-            leftFocused = true;
-            currentListView = lv_left_view;
-            currentFileMan = leftFileMan;
-            currentHelper = leftHelper;
-        }
-
-        private void lv_right_view_Click(object sender, EventArgs e)
-        {
-            leftFocused = false;
-            currentListView = lv_right_view;
-            currentFileMan = rightFileMan;
-            currentHelper = rightHelper;
-        }
-
-        private void lv_view_AfterEdit(object sender, LabelEditEventArgs e)
+        private void ListView_AfterEdit(object sender, LabelEditEventArgs e)
         {
             string name = currentListView.SelectedItems[0].Text;
             string newname = name;
@@ -71,13 +55,29 @@ namespace Total_Commander
             {
                 newname = e.Label.ToString();
             }
-            currentFileMan.Rename(currentListView.SelectedIndices[0], name, newname);
-            RefreshAll();
+
+            if (currentFileMan.Rename(name, newname))
+            {
+                RefreshAll();
+            }
         }
 
-        private void lv_view_BeforeEdit(object sender, LabelEditEventArgs e)
+        private void leftListView_Click(object sender, EventArgs e)
         {
+            //MessageBox.Show("Left");
+            leftFocused = true;
+            currentListView = lv_left_view;
+            currentFileMan = leftFileMan;
+            currentHelper = leftHelper;
+        }
 
+        private void rightListView_Click(object sender, EventArgs e)
+        {
+            //MessageBox.Show("Right");
+            leftFocused = false;
+            currentListView = lv_right_view;
+            currentFileMan = rightFileMan;
+            currentHelper = rightHelper;
         }
     }
 }

@@ -52,22 +52,22 @@
             this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.copyToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyContextMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.cutContextMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.pastenewFolderContextMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.pasteContextMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.newFolderContextMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.deletenewFolderContextMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteContextMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.renameContextMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.lv_right_view = new System.Windows.Forms.ListView();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.cb_left_drives = new System.Windows.Forms.ComboBox();
-            this.lb_left_info = new System.Windows.Forms.Label();
+            this.leftComboBox = new System.Windows.Forms.ComboBox();
+            this.leftLabelInfo = new System.Windows.Forms.Label();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.cb_right_drives = new System.Windows.Forms.ComboBox();
-            this.lb_right_info = new System.Windows.Forms.Label();
-            this.tb_left_addressbar = new System.Windows.Forms.TextBox();
-            this.tb_right_addressbar = new System.Windows.Forms.TextBox();
+            this.rightComboBox = new System.Windows.Forms.ComboBox();
+            this.rightLabelInfo = new System.Windows.Forms.Label();
+            this.leftAddressBar = new System.Windows.Forms.TextBox();
+            this.rightAddressBar = new System.Windows.Forms.TextBox();
             this.mainMenuBar.SuspendLayout();
             this.mainToolBar.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -255,20 +255,20 @@
             this.lv_left_view.TabIndex = 0;
             this.lv_left_view.UseCompatibleStateImageBehavior = false;
             this.lv_left_view.View = System.Windows.Forms.View.Details;
-            this.lv_left_view.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.lv_view_AfterEdit);
-            this.lv_left_view.Click += new System.EventHandler(this.lv_left_view_Click);
-            this.lv_left_view.DoubleClick += new System.EventHandler(this.lv_view_DoubleClick);
+            this.lv_left_view.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.ListView_AfterEdit);
+            this.lv_left_view.DoubleClick += new System.EventHandler(this.ListView_DoubleClick);
+            this.lv_left_view.Enter += new System.EventHandler(this.leftListView_Click);
             // 
             // contextMenu
             // 
             this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.viewToolStripMenuItem1,
             this.editToolStripMenuItem1,
-            this.copyToolStripMenuItem1,
+            this.copyContextMenu,
             this.cutContextMenu,
-            this.pastenewFolderContextMenu,
+            this.pasteContextMenu,
             this.newFolderContextMenu,
-            this.deletenewFolderContextMenu,
+            this.deleteContextMenu,
             this.renameContextMenu});
             this.contextMenu.Name = "mainMenu";
             this.contextMenu.Size = new System.Drawing.Size(135, 180);
@@ -285,11 +285,12 @@
             this.editToolStripMenuItem1.Size = new System.Drawing.Size(134, 22);
             this.editToolStripMenuItem1.Text = "Edit";
             // 
-            // copyToolStripMenuItem1
+            // copyContextMenu
             // 
-            this.copyToolStripMenuItem1.Name = "copyToolStripMenuItem1";
-            this.copyToolStripMenuItem1.Size = new System.Drawing.Size(134, 22);
-            this.copyToolStripMenuItem1.Text = "Copy";
+            this.copyContextMenu.Name = "copyContextMenu";
+            this.copyContextMenu.Size = new System.Drawing.Size(134, 22);
+            this.copyContextMenu.Text = "Copy";
+            this.copyContextMenu.Click += new System.EventHandler(this.copyContextMenu_Click);
             // 
             // cutContextMenu
             // 
@@ -298,11 +299,12 @@
             this.cutContextMenu.Text = "Cut";
             this.cutContextMenu.Click += new System.EventHandler(this.cutContextMenu_Click);
             // 
-            // pastenewFolderContextMenu
+            // pasteContextMenu
             // 
-            this.pastenewFolderContextMenu.Name = "pastenewFolderContextMenu";
-            this.pastenewFolderContextMenu.Size = new System.Drawing.Size(134, 22);
-            this.pastenewFolderContextMenu.Text = "Paste";
+            this.pasteContextMenu.Name = "pasteContextMenu";
+            this.pasteContextMenu.Size = new System.Drawing.Size(134, 22);
+            this.pasteContextMenu.Text = "Paste";
+            this.pasteContextMenu.Click += new System.EventHandler(this.pasteContextMenu_Click);
             // 
             // newFolderContextMenu
             // 
@@ -311,11 +313,12 @@
             this.newFolderContextMenu.Text = "New Folder";
             this.newFolderContextMenu.Click += new System.EventHandler(this.newFolderContextMenu_Click);
             // 
-            // deletenewFolderContextMenu
+            // deleteContextMenu
             // 
-            this.deletenewFolderContextMenu.Name = "deletenewFolderContextMenu";
-            this.deletenewFolderContextMenu.Size = new System.Drawing.Size(134, 22);
-            this.deletenewFolderContextMenu.Text = "Delete";
+            this.deleteContextMenu.Name = "deleteContextMenu";
+            this.deleteContextMenu.Size = new System.Drawing.Size(134, 22);
+            this.deleteContextMenu.Text = "Delete";
+            this.deleteContextMenu.Click += new System.EventHandler(this.deleteContextMenu_Click);
             // 
             // renameContextMenu
             // 
@@ -337,9 +340,9 @@
             this.lv_right_view.TabIndex = 1;
             this.lv_right_view.UseCompatibleStateImageBehavior = false;
             this.lv_right_view.View = System.Windows.Forms.View.Details;
-            this.lv_right_view.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.lv_view_AfterEdit);
-            this.lv_right_view.Click += new System.EventHandler(this.lv_right_view_Click);
-            this.lv_right_view.DoubleClick += new System.EventHandler(this.lv_view_DoubleClick);
+            this.lv_right_view.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.ListView_AfterEdit);
+            this.lv_right_view.DoubleClick += new System.EventHandler(this.ListView_DoubleClick);
+            this.lv_right_view.Enter += new System.EventHandler(this.rightListView_Click);
             // 
             // tableLayoutPanel2
             // 
@@ -350,8 +353,8 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel4, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.tb_left_addressbar, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.tb_right_addressbar, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.leftAddressBar, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.rightAddressBar, 1, 1);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(9, 48);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -367,8 +370,8 @@
             this.tableLayoutPanel3.ColumnCount = 2;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.58824F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 69.41177F));
-            this.tableLayoutPanel3.Controls.Add(this.cb_left_drives, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.lb_left_info, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.leftComboBox, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.leftLabelInfo, 1, 0);
             this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -378,30 +381,30 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(284, 24);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
-            // cb_left_drives
+            // leftComboBox
             // 
-            this.cb_left_drives.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.leftComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.cb_left_drives.FormattingEnabled = true;
-            this.cb_left_drives.Location = new System.Drawing.Point(2, 2);
-            this.cb_left_drives.Margin = new System.Windows.Forms.Padding(2);
-            this.cb_left_drives.Name = "cb_left_drives";
-            this.cb_left_drives.Size = new System.Drawing.Size(82, 21);
-            this.cb_left_drives.TabIndex = 0;
-            this.cb_left_drives.SelectedIndexChanged += new System.EventHandler(this.cb_left_drives_SelectedIndexChanged);
+            this.leftComboBox.FormattingEnabled = true;
+            this.leftComboBox.Location = new System.Drawing.Point(2, 2);
+            this.leftComboBox.Margin = new System.Windows.Forms.Padding(2);
+            this.leftComboBox.Name = "leftComboBox";
+            this.leftComboBox.Size = new System.Drawing.Size(82, 21);
+            this.leftComboBox.TabIndex = 0;
+            this.leftComboBox.SelectedIndexChanged += new System.EventHandler(this.leftComboBox_SelectedIndexChanged);
             // 
-            // lb_left_info
+            // leftLabelInfo
             // 
-            this.lb_left_info.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.leftLabelInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.lb_left_info.AutoSize = true;
-            this.lb_left_info.Location = new System.Drawing.Point(88, 0);
-            this.lb_left_info.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lb_left_info.Name = "lb_left_info";
-            this.lb_left_info.Size = new System.Drawing.Size(35, 24);
-            this.lb_left_info.TabIndex = 1;
-            this.lb_left_info.Text = "label1";
-            this.lb_left_info.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.leftLabelInfo.AutoSize = true;
+            this.leftLabelInfo.Location = new System.Drawing.Point(88, 0);
+            this.leftLabelInfo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.leftLabelInfo.Name = "leftLabelInfo";
+            this.leftLabelInfo.Size = new System.Drawing.Size(35, 24);
+            this.leftLabelInfo.TabIndex = 1;
+            this.leftLabelInfo.Text = "label1";
+            this.leftLabelInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tableLayoutPanel4
             // 
@@ -409,8 +412,8 @@
             this.tableLayoutPanel4.ColumnCount = 2;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.28169F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 69.71831F));
-            this.tableLayoutPanel4.Controls.Add(this.cb_right_drives, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.lb_right_info, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.rightComboBox, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.rightLabelInfo, 1, 0);
             this.tableLayoutPanel4.Location = new System.Drawing.Point(393, 0);
             this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
@@ -420,60 +423,60 @@
             this.tableLayoutPanel4.Size = new System.Drawing.Size(284, 24);
             this.tableLayoutPanel4.TabIndex = 1;
             // 
-            // cb_right_drives
+            // rightComboBox
             // 
-            this.cb_right_drives.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.rightComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.cb_right_drives.FormattingEnabled = true;
-            this.cb_right_drives.Location = new System.Drawing.Point(2, 2);
-            this.cb_right_drives.Margin = new System.Windows.Forms.Padding(2);
-            this.cb_right_drives.Name = "cb_right_drives";
-            this.cb_right_drives.Size = new System.Drawing.Size(82, 21);
-            this.cb_right_drives.TabIndex = 0;
-            this.cb_right_drives.SelectedIndexChanged += new System.EventHandler(this.cb_right_drives_SelectedIndexChanged);
+            this.rightComboBox.FormattingEnabled = true;
+            this.rightComboBox.Location = new System.Drawing.Point(2, 2);
+            this.rightComboBox.Margin = new System.Windows.Forms.Padding(2);
+            this.rightComboBox.Name = "rightComboBox";
+            this.rightComboBox.Size = new System.Drawing.Size(82, 21);
+            this.rightComboBox.TabIndex = 0;
+            this.rightComboBox.SelectedIndexChanged += new System.EventHandler(this.rightComboBox_SelectedIndexChanged);
             // 
-            // lb_right_info
+            // rightLabelInfo
             // 
-            this.lb_right_info.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.rightLabelInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.lb_right_info.AutoSize = true;
-            this.lb_right_info.Location = new System.Drawing.Point(88, 0);
-            this.lb_right_info.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lb_right_info.Name = "lb_right_info";
-            this.lb_right_info.Size = new System.Drawing.Size(35, 24);
-            this.lb_right_info.TabIndex = 1;
-            this.lb_right_info.Text = "label2";
-            this.lb_right_info.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.rightLabelInfo.AutoSize = true;
+            this.rightLabelInfo.Location = new System.Drawing.Point(88, 0);
+            this.rightLabelInfo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.rightLabelInfo.Name = "rightLabelInfo";
+            this.rightLabelInfo.Size = new System.Drawing.Size(35, 24);
+            this.rightLabelInfo.TabIndex = 1;
+            this.rightLabelInfo.Text = "label2";
+            this.rightLabelInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // tb_left_addressbar
+            // leftAddressBar
             // 
-            this.tb_left_addressbar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.leftAddressBar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tb_left_addressbar.Location = new System.Drawing.Point(2, 27);
-            this.tb_left_addressbar.Margin = new System.Windows.Forms.Padding(2);
-            this.tb_left_addressbar.Name = "tb_left_addressbar";
-            this.tb_left_addressbar.ReadOnly = true;
-            this.tb_left_addressbar.Size = new System.Drawing.Size(389, 20);
-            this.tb_left_addressbar.TabIndex = 2;
-            this.tb_left_addressbar.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tb_addressbar_Click);
-            this.tb_left_addressbar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb_left_addressbar_KeyDown);
-            this.tb_left_addressbar.Leave += new System.EventHandler(this.tb_addressbar_Leave);
+            this.leftAddressBar.Location = new System.Drawing.Point(2, 27);
+            this.leftAddressBar.Margin = new System.Windows.Forms.Padding(2);
+            this.leftAddressBar.Name = "leftAddressBar";
+            this.leftAddressBar.ReadOnly = true;
+            this.leftAddressBar.Size = new System.Drawing.Size(389, 20);
+            this.leftAddressBar.TabIndex = 2;
+            this.leftAddressBar.MouseClick += new System.Windows.Forms.MouseEventHandler(this.AddressBar_Click);
+            this.leftAddressBar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.leftAddressBar_KeyDown);
+            this.leftAddressBar.Leave += new System.EventHandler(this.AddressBar_Leave);
             // 
-            // tb_right_addressbar
+            // rightAddressBar
             // 
-            this.tb_right_addressbar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.rightAddressBar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tb_right_addressbar.Location = new System.Drawing.Point(395, 27);
-            this.tb_right_addressbar.Margin = new System.Windows.Forms.Padding(2);
-            this.tb_right_addressbar.Name = "tb_right_addressbar";
-            this.tb_right_addressbar.ReadOnly = true;
-            this.tb_right_addressbar.Size = new System.Drawing.Size(389, 20);
-            this.tb_right_addressbar.TabIndex = 3;
-            this.tb_right_addressbar.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tb_addressbar_Click);
-            this.tb_right_addressbar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb_right_addressbar_KeyDown);
-            this.tb_right_addressbar.Leave += new System.EventHandler(this.tb_addressbar_Leave);
+            this.rightAddressBar.Location = new System.Drawing.Point(395, 27);
+            this.rightAddressBar.Margin = new System.Windows.Forms.Padding(2);
+            this.rightAddressBar.Name = "rightAddressBar";
+            this.rightAddressBar.ReadOnly = true;
+            this.rightAddressBar.Size = new System.Drawing.Size(389, 20);
+            this.rightAddressBar.TabIndex = 3;
+            this.rightAddressBar.MouseClick += new System.Windows.Forms.MouseEventHandler(this.AddressBar_Click);
+            this.rightAddressBar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.rightAddressBar_KeyDown);
+            this.rightAddressBar.Leave += new System.EventHandler(this.AddressBar_Leave);
             // 
             // Form1
             // 
@@ -520,12 +523,12 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.ListView lv_left_view;
         private System.Windows.Forms.ListView lv_right_view;
-        private System.Windows.Forms.TextBox tb_left_addressbar;
-        private System.Windows.Forms.TextBox tb_right_addressbar;
-        private System.Windows.Forms.ComboBox cb_left_drives;
-        private System.Windows.Forms.Label lb_left_info;
-        private System.Windows.Forms.ComboBox cb_right_drives;
-        private System.Windows.Forms.Label lb_right_info;
+        private System.Windows.Forms.TextBox leftAddressBar;
+        private System.Windows.Forms.TextBox rightAddressBar;
+        private System.Windows.Forms.ComboBox leftComboBox;
+        private System.Windows.Forms.Label leftLabelInfo;
+        private System.Windows.Forms.ComboBox rightComboBox;
+        private System.Windows.Forms.Label rightLabelInfo;
         private System.Windows.Forms.ToolStripButton toolStripButton5;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
@@ -538,11 +541,11 @@
         private System.Windows.Forms.ContextMenuStrip contextMenu;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem copyContextMenu;
         private System.Windows.Forms.ToolStripMenuItem cutContextMenu;
-        private System.Windows.Forms.ToolStripMenuItem pastenewFolderContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem pasteContextMenu;
         private System.Windows.Forms.ToolStripMenuItem newFolderContextMenu;
-        private System.Windows.Forms.ToolStripMenuItem deletenewFolderContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem deleteContextMenu;
         private System.Windows.Forms.ToolStripMenuItem renameContextMenu;
     }
 }
