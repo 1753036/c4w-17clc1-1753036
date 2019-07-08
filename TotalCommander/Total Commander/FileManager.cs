@@ -114,6 +114,41 @@ namespace Total_Commander
             MessageBox.Show("Directory not found");
         }
 
+        public string ReadWholeFile(string filename)
+        {
+            string path = Path.Combine(CurrentDir.FullName, filename);
+
+            if (Directory.Exists(path))
+            {
+                return "";
+            }
+
+            FileStream fs = File.OpenRead(path);
+            try
+            {
+                byte[] bytes = new byte[fs.Length];
+                byte[] convert = new byte[fs.Length];
+                int index = 0;
+                fs.Read(bytes, 0, Convert.ToInt32(fs.Length));
+                fs.Close();
+
+                foreach (var b in bytes)
+                {
+                    if (b != 0)
+                    {
+                        convert[index] = b;
+                        index += 1;
+                    }
+                }
+
+                return Encoding.UTF8.GetString(convert);
+            }
+            finally
+            {
+                fs.Close();
+            }
+        }
+
         public void Delete(string item)
         {
             // @FIXME: delete recursive
@@ -147,8 +182,7 @@ namespace Total_Commander
             {
                 path = Path.Combine(CurrentDir.FullName, "New Folder (" + i.ToString() +")");
             }
-
-            //MessageBox.Show(path);
+            
             Directory.CreateDirectory(path);
         }
 
@@ -198,7 +232,14 @@ namespace Total_Commander
 
             if (File.Exists(src) && !File.Exists(dest))
             {
-                File.Move(src, dest);
+                try
+                {
+                    File.Move(src, dest);
+                }
+                catch
+                {
+                    MessageBox.Show("Permission denied!");
+                }
                 return true;
             }
 

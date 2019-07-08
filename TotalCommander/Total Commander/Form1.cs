@@ -21,8 +21,6 @@ namespace Total_Commander
         private FileManager currentFileMan;
         private DisplayHelper currentHelper;
         private ListView currentListView;
-        private string beforeLabelEditString;
-        private string afterLabelEditString;
         private bool leftFocused;
 
         public Form1()
@@ -34,6 +32,7 @@ namespace Total_Commander
 
         private void RefreshAll()
         {
+            //MessageBox.Show("ASDSAD");
             leftHelper.Refresh();
             rightHelper.Refresh();
         }
@@ -78,6 +77,11 @@ namespace Total_Commander
             currentListView = lv_right_view;
             currentFileMan = rightFileMan;
             currentHelper = rightHelper;
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }

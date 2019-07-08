@@ -23,7 +23,7 @@ namespace Total_Commander
 
         private void tsb_view_Click(object sender, EventArgs e)
         {
-            change_View(View.SmallIcon);
+            change_View(View.LargeIcon);
         }
 
         private void tsb_list_Click(object sender, EventArgs e)

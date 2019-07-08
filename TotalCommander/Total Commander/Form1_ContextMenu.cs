@@ -39,7 +39,7 @@ namespace Total_Commander
             RefreshAll();
         }
 
-        private void cutContextMenu_Click(object sender, EventArgs e)
+        private void moveContextMenu_Click(object sender, EventArgs e)
         {
             ClearClipboard();
             string parent = currentFileMan.CurrentDir.FullName;
@@ -101,6 +101,13 @@ namespace Total_Commander
             RefreshAll();
         }
 
-
+        private void viewContextMenu_Click(object sender, EventArgs e)
+        {
+            string name = currentListView.SelectedItems[0].Text;
+            Form2 f2 = new Form2();
+            f2.Text = name;
+            f2.SetText(currentFileMan.ReadWholeFile(name));
+            f2.Show();
+        }
     }
 }

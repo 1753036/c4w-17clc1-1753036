@@ -18,3 +18,4 @@ C:\Users\Chutich\Desktop\c4w-17clc1-1753036\TotalCommander\Total Commander\obj\D
 C:\Users\Chutich\Desktop\c4w-17clc1-1753036\TotalCommander\Total Commander\bin\Debug\Total Commander.exe.config
 C:\Users\Chutich\Desktop\c4w-17clc1-1753036\TotalCommander\Total Commander\bin\Debug\Total Commander.exe
 C:\Users\Chutich\Desktop\c4w-17clc1-1753036\TotalCommander\Total Commander\bin\Debug\Total Commander.pdb
+C:\Users\Chutich\Desktop\c4w-17clc1-1753036\TotalCommander\Total Commander\obj\Debug\Total_Commander.Form2.resources

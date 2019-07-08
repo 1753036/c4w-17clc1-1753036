@@ -28,7 +28,6 @@ namespace Total_Commander
             filesView = lv;
             menu = m;
 
-            imageList.Images.Add(Icon.ExtractAssociatedIcon("folder.ico"));
             imageList.ColorDepth = ColorDepth.Depth32Bit;
 
             filesView.SmallImageList = imageList;
@@ -44,7 +43,7 @@ namespace Total_Commander
         {
             filesView.Columns.Add("Name", 200);
             filesView.Columns.Add("Ext", 50);
-            filesView.Columns.Add("Size(MB)", 100);
+            filesView.Columns.Add("Size(KB)", 60);
             filesView.Columns.Add("Date", 100);
             filesView.Columns.Add("Attr", 500);
         }
@@ -84,23 +83,23 @@ namespace Total_Commander
             AddFilesViewItem(
                 file.Name,
                 file.Extension.ToString(),
-                (file.Length / 1024 / 1024).ToString(),
+                (file.Length / 1024).ToString(),
                 file.LastAccessTime.ToShortDateString(),
                 file.Attributes.ToString(),
                 GetIconIndex(file)
             );
         }
 
+        void ClearImageList()
+        {
+            imageList.Images.Clear();
+            imageList.Images.Add(Icon.ExtractAssociatedIcon("folder.ico"));
+        }
+
         int GetIconIndex(FileInfo file)
         {
-            string key = file.Extension;
-
-            if (!imageList.Images.Keys.Contains(key)) 
-            {
-                imageList.Images.Add(key, Icon.ExtractAssociatedIcon(file.FullName));
-            }
-
-            return imageList.Images.IndexOfKey(key);
+            imageList.Images.Add(Icon.ExtractAssociatedIcon(file.FullName));
+            return imageList.Images.Count - 1;
         }
 
         public void UpdateAddrBar()
@@ -124,7 +123,7 @@ namespace Total_Commander
         {
             DirectoryInfo[] dirs = fileMan.GetDirectories();
             FileInfo[] files = fileMan.GetFiles();
-
+            ClearImageList();
             filesView.Items.Clear();
             filesView.Refresh();
 
