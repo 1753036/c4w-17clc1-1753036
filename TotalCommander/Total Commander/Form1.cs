@@ -83,5 +83,23 @@ namespace Total_Commander
         {
             Environment.Exit(0);
         }
+
+        private void hiddenFIlesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            leftFileMan.ShowHidden(!leftFileMan.IsHidden());
+            leftHelper.Refresh();
+            rightFileMan.ShowHidden(!rightFileMan.IsHidden());
+            rightHelper.Refresh();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+            RefreshAll();
+        }
     }
 }

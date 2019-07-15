@@ -26,8 +26,17 @@ namespace Total_Commander
 
         private void newFolderContextMenu_Click(object sender, EventArgs e)
         {
-            currentFileMan.NewFolder();
+            string name = currentFileMan.NewFolder();
             RefreshAll();
+
+            foreach (ListViewItem item in currentListView.Items)
+            {
+                if (item.Text == name)
+                {
+                    item.Selected = true;
+                    item.BeginEdit();
+                }
+            }
         }
 
         private void deleteContextMenu_Click(object sender, EventArgs e)
@@ -91,7 +100,7 @@ namespace Total_Commander
                     {
                         string src = Path.Combine(srcDir, item);
                         string dest = Path.Combine(destDir, item);
-                        MessageBox.Show(src + " Copy to " + dest);
+                        //MessageBox.Show(src + " Copy to " + dest);
                         currentFileMan.Copy(src, dest);
                     }
                 }
@@ -103,11 +112,23 @@ namespace Total_Commander
 
         private void viewContextMenu_Click(object sender, EventArgs e)
         {
+            if (currentListView.SelectedItems.Count == 0)
+            {
+                return;
+            }
+
             string name = currentListView.SelectedItems[0].Text;
+            string text = currentFileMan.ReadWholeFile(name);
+            if (text == "")
+            {
+                return;
+            }
+
             Form2 f2 = new Form2();
             f2.Text = name;
-            f2.SetText(currentFileMan.ReadWholeFile(name));
+            f2.SetText(text);
             f2.Show();
         }
     }
 }
+

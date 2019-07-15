@@ -11,9 +11,9 @@ namespace Total_Commander
         private void SetupComponents()
         {
             leftFileMan = new FileManager();
-            leftFileMan.ShowHidden(true);
+            leftFileMan.ShowHidden(false);
             rightFileMan = new FileManager();
-            rightFileMan.ShowHidden(true);
+            rightFileMan.ShowHidden(false);
 
             leftHelper = new DisplayHelper(
                 leftFileMan,

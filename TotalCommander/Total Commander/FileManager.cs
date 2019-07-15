@@ -37,6 +37,11 @@ namespace Total_Commander
             showHidden = show;
         }
 
+        public bool IsHidden()
+        {
+            return showHidden;
+        }
+
         public void OpenDrive(int index)
         {
             if (index >= Drives.Length || index < 0)
@@ -123,67 +128,64 @@ namespace Total_Commander
                 return "";
             }
 
-            FileStream fs = File.OpenRead(path);
-            try
-            {
-                byte[] bytes = new byte[fs.Length];
-                byte[] convert = new byte[fs.Length];
-                int index = 0;
-                fs.Read(bytes, 0, Convert.ToInt32(fs.Length));
-                fs.Close();
+            byte[] bytes = File.ReadAllBytes(path);
 
-                foreach (var b in bytes)
+            for (int i = 0; i < bytes.Length; ++i)
+            {
+                if (bytes[i] == 0)
                 {
-                    if (b != 0)
-                    {
-                        convert[index] = b;
-                        index += 1;
-                    }
+                    bytes[i] = 40;
                 }
+            }
 
-                return Encoding.UTF8.GetString(convert);
-            }
-            finally
-            {
-                fs.Close();
-            }
+            return Encoding.UTF8.GetString(bytes);
         }
 
         public void Delete(string item)
         {
             // @FIXME: delete recursive
-            string path = Path.Combine(CurrentDir.FullName, item);
+            Form4 frm = new Form4("Do you want to delete " + item + "?");
+            frm.ShowDialog();
+            if (frm.DialogResult != DialogResult.OK)
+            {
+                return;
+            }
+
+            string path = Path.Combine(CurrentDir.FullName, item);            
             if (File.Exists(path))
             {
                 File.Delete(path);
                 return;
             }
 
-            var files = Directory.GetFiles(path);
-            foreach (var f in files)
-            {
-                File.Delete(f);
-            }
+            //var files = Directory.GetFiles(path);
+            //foreach (var f in files)
+            //{
+            //    File.Delete(f);
+            //}
 
-            var folders = Directory.GetDirectories(path);
-            foreach (var f in folders)
-            {
-                Delete(f);
-            }
+            //var folders = Directory.GetDirectories(path);
+            //foreach (var f in folders)
+            //{
+            //    Delete(f);
+            //}
 
-            Directory.Delete(path);
+            Directory.Delete(path, true);
         }
 
-        public void NewFolder()
+        public string NewFolder()
         {
-            string path = Path.Combine(CurrentDir.FullName,"New Folder");
+            string name = "New Folder";
+            string path = Path.Combine(CurrentDir.FullName, name);
 
             for (int i = 1; Directory.Exists(path); ++i)
             {
-                path = Path.Combine(CurrentDir.FullName, "New Folder (" + i.ToString() +")");
+                name = "New Folder (" + i.ToString() + ")";
+                path = Path.Combine(CurrentDir.FullName, name);
             }
             
             Directory.CreateDirectory(path);
+            return name;
         }
 
         public bool Rename(string name, string newname)
@@ -196,9 +198,30 @@ namespace Total_Commander
 
         public void Copy(string src, string dest)
         {
+            if (src == dest)
+            {
+                return;
+            }
+
             if (File.Exists(src))
             {
-                File.Copy(src, dest);
+                bool overwrite = false;
+                if (File.Exists(dest))
+                {
+                    var frm = new Form3("Copy from " + src + " To " + dest);
+                    frm.ShowDialog();
+                    overwrite = frm.DialogResult == DialogResult.OK;
+                    //if (frm.DialogResult == DialogResult.OK)
+                    //{
+                    //    File.Delete(dest);
+                    //}
+                    //else if (frm.DialogResult == DialogResult.Ignore)
+                    //{
+                    //    return;
+                    //}
+                }
+
+                File.Copy(src, dest, overwrite);
                 return;
             }
 
@@ -211,7 +234,7 @@ namespace Total_Commander
             foreach (var f in files)
             {
                 string name = Path.GetFileName(f);
-                File.Copy(f, Path.Combine(dest, name));
+                Copy(f, Path.Combine(dest, name));
             }
 
             var folders = Directory.GetDirectories(src);
@@ -222,6 +245,7 @@ namespace Total_Commander
                 Copy(f, Path.Combine(dest, name));
             }
         }
+
         public bool MoveTheSameDrive(string src, string dest)
         {
             if (Directory.Exists(src) && !Directory.Exists(dest))
@@ -248,21 +272,14 @@ namespace Total_Commander
 
         public bool Move(string src, string dest)
         {
-            //MessageBox.Show("KHong the move accross volume!!!");
-            var folders = GetDirectories();
-
-            if (Path.GetPathRoot(src) == Path.GetPathRoot(dest))
+            if (src == dest)
             {
-                return MoveTheSameDrive(src, dest);
-            }
-            else
-            {
-                Copy(src, dest);
-                Delete(src);
-                return true;
+                return false;
             }
 
-            return false;
+            Copy(src, dest);
+            Delete(src);
+            return true;
         }
 
         public DirectoryInfo[] GetDirectories()

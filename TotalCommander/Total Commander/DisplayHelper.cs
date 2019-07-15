@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -11,7 +12,7 @@ namespace Total_Commander
 {
     class DisplayHelper
     {
-        private static ImageList imageList = new ImageList();
+        private ImageList imageList = new ImageList();
         private FileManager fileMan;
         private ComboBox driveOptions;
         private Label driveInfo;
@@ -56,7 +57,7 @@ namespace Total_Commander
             }
         }
 
-        void AddFilesViewItem(string name, string ext, string size, string date, string attr, int imageIndex = 0)
+        ListViewItem AddFilesViewItem(string name, string ext, string size, string date, string attr, int imageIndex = 0)
         {
             ListViewItem item = new ListViewItem(name);
             item.SubItems.Add(ext);
@@ -65,22 +66,23 @@ namespace Total_Commander
             item.SubItems.Add(attr);
             item.ImageIndex = imageIndex;
             filesView.Items.Add(item);
+            return item;
         }
 
-        void AddFilesViewItem(DirectoryInfo dir)
+        ListViewItem AddFilesViewItem(DirectoryInfo dir)
         {
-            AddFilesViewItem(
+            return AddFilesViewItem(
                 dir.Name, 
-                "", 
-                "", 
+                "<DIR>", 
+                "0", 
                 dir.LastAccessTime.ToShortDateString(), 
                 dir.Attributes.ToString()
             );
         }
 
-        void AddFilesViewItem(FileInfo file)
+        ListViewItem AddFilesViewItem(FileInfo file)
         {
-            AddFilesViewItem(
+            var item = AddFilesViewItem(
                 file.Name,
                 file.Extension.ToString(),
                 (file.Length / 1024).ToString(),
@@ -88,6 +90,8 @@ namespace Total_Commander
                 file.Attributes.ToString(),
                 GetIconIndex(file)
             );
+            item.Tag = file;
+            return item;
         }
 
         void ClearImageList()
@@ -146,8 +150,6 @@ namespace Total_Commander
         public void Refresh()
         {
             UpdateDriveInfo();
-            UpdateAddrBar();
-            UpdateFilesView();
         }
 
         public void ShowMenu(Point point)
