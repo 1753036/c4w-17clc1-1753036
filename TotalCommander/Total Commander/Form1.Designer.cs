@@ -40,6 +40,8 @@
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.defaultTextEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.notepadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sublimeTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hiddenFIlesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,7 +58,7 @@
             this.lv_left_view = new System.Windows.Forms.ListView();
             this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewContextMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.editToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.editContextMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.copyContextMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.cutContextMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.pasteContextMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -119,41 +121,41 @@
             // viewToolStripMenuItem
             // 
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.viewToolStripMenuItem.Text = "View";
             this.viewToolStripMenuItem.Click += new System.EventHandler(this.viewContextMenu_Click);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.editToolStripMenuItem.Text = "Edit";
             // 
             // copyToolStripMenuItem
             // 
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.copyToolStripMenuItem.Text = "Copy";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyContextMenu_Click);
             // 
             // moveToolStripMenuItem
             // 
             this.moveToolStripMenuItem.Name = "moveToolStripMenuItem";
-            this.moveToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
+            this.moveToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.moveToolStripMenuItem.Text = "Cut";
             this.moveToolStripMenuItem.Click += new System.EventHandler(this.moveContextMenu_Click);
             // 
             // newFolderToolStripMenuItem
             // 
             this.newFolderToolStripMenuItem.Name = "newFolderToolStripMenuItem";
-            this.newFolderToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
+            this.newFolderToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.newFolderToolStripMenuItem.Text = "New Folder";
-            this.newFolderToolStripMenuItem.Click += new System.EventHandler(this.pasteContextMenu_Click);
+            this.newFolderToolStripMenuItem.Click += new System.EventHandler(this.newFolderContextMenu_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteContextMenu_Click);
             // 
@@ -163,26 +165,43 @@
             this.defaultTextEditorToolStripMenuItem,
             this.hiddenFIlesToolStripMenuItem});
             this.optionToolStripMenuItem.Name = "optionToolStripMenuItem";
-            this.optionToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
+            this.optionToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.optionToolStripMenuItem.Text = "Option";
             // 
             // defaultTextEditorToolStripMenuItem
             // 
+            this.defaultTextEditorToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.notepadToolStripMenuItem,
+            this.sublimeTextToolStripMenuItem});
             this.defaultTextEditorToolStripMenuItem.Name = "defaultTextEditorToolStripMenuItem";
-            this.defaultTextEditorToolStripMenuItem.Size = new System.Drawing.Size(208, 26);
+            this.defaultTextEditorToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.defaultTextEditorToolStripMenuItem.Text = "Default Text Editor";
+            // 
+            // notepadToolStripMenuItem
+            // 
+            this.notepadToolStripMenuItem.Name = "notepadToolStripMenuItem";
+            this.notepadToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.notepadToolStripMenuItem.Text = "Notepad";
+            this.notepadToolStripMenuItem.Click += new System.EventHandler(this.notepadToolStripMenuItem_Click);
+            // 
+            // sublimeTextToolStripMenuItem
+            // 
+            this.sublimeTextToolStripMenuItem.Name = "sublimeTextToolStripMenuItem";
+            this.sublimeTextToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.sublimeTextToolStripMenuItem.Text = "Sublime Text";
+            this.sublimeTextToolStripMenuItem.Click += new System.EventHandler(this.sublimeTextToolStripMenuItem_Click);
             // 
             // hiddenFIlesToolStripMenuItem
             // 
             this.hiddenFIlesToolStripMenuItem.Name = "hiddenFIlesToolStripMenuItem";
-            this.hiddenFIlesToolStripMenuItem.Size = new System.Drawing.Size(208, 26);
+            this.hiddenFIlesToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.hiddenFIlesToolStripMenuItem.Text = "Hidden FIles";
             this.hiddenFIlesToolStripMenuItem.Click += new System.EventHandler(this.hiddenFIlesToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -351,7 +370,7 @@
             this.contextMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.viewContextMenu,
-            this.editToolStripMenuItem1,
+            this.editContextMenu,
             this.copyContextMenu,
             this.cutContextMenu,
             this.pasteContextMenu,
@@ -368,11 +387,12 @@
             this.viewContextMenu.Text = "View";
             this.viewContextMenu.Click += new System.EventHandler(this.viewContextMenu_Click);
             // 
-            // editToolStripMenuItem1
+            // editContextMenu
             // 
-            this.editToolStripMenuItem1.Name = "editToolStripMenuItem1";
-            this.editToolStripMenuItem1.Size = new System.Drawing.Size(154, 24);
-            this.editToolStripMenuItem1.Text = "Edit";
+            this.editContextMenu.Name = "editContextMenu";
+            this.editContextMenu.Size = new System.Drawing.Size(154, 24);
+            this.editContextMenu.Text = "Edit";
+            this.editContextMenu.Click += new System.EventHandler(this.editContextMenu_Click);
             // 
             // copyContextMenu
             // 
@@ -690,7 +710,7 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip contextMenu;
         private System.Windows.Forms.ToolStripMenuItem viewContextMenu;
-        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem editContextMenu;
         private System.Windows.Forms.ToolStripMenuItem copyContextMenu;
         private System.Windows.Forms.ToolStripMenuItem cutContextMenu;
         private System.Windows.Forms.ToolStripMenuItem pasteContextMenu;
@@ -707,6 +727,8 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.ToolStripMenuItem notepadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sublimeTextToolStripMenuItem;
     }
 }
 

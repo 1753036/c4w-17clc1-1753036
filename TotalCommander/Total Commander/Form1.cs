@@ -101,5 +101,17 @@ namespace Total_Commander
         {
             RefreshAll();
         }
+
+        private void notepadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            leftFileMan.DefaultEdit = "notepad.exe";
+            rightFileMan.DefaultEdit = "notepad.exe";
+        }
+
+        private void sublimeTextToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            leftFileMan.DefaultEdit = "subl.exe";
+            rightFileMan.DefaultEdit = "subl.exe";
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -41,9 +42,11 @@ namespace Total_Commander
 
         private void deleteContextMenu_Click(object sender, EventArgs e)
         {
+            bool show = true;
             foreach (ListViewItem item in currentListView.SelectedItems)
             {
-                currentFileMan.Delete(item.Text);
+                currentFileMan.Delete(item.Text, show);
+                show = false;
             }
             RefreshAll();
         }
@@ -128,6 +131,16 @@ namespace Total_Commander
             f2.Text = name;
             f2.SetText(text);
             f2.Show();
+        }
+
+        private void editContextMenu_Click(object sender, EventArgs e)
+        {
+            if (currentListView.SelectedItems.Count == 0)
+            {
+                return;
+            }
+            string path = Path.Combine(currentFileMan.CurrentDir.FullName, currentListView.SelectedItems[0].Text);
+            currentFileMan.EditFile(path);
         }
     }
 }

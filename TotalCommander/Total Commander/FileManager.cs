@@ -16,6 +16,7 @@ namespace Total_Commander
         public DirectoryInfo CurrentDir;
         public DriveInfo CurrentDrive;
         private bool showHidden = false;
+        public string DefaultEdit = "notepad.exe";
 
         public FileManager()
         {
@@ -89,11 +90,21 @@ namespace Total_Commander
 
             if (file.Exists)
             {
-                Process.Start(path);
+                Process.Start(@path);
                 return;
             }
 
             MessageBox.Show("File not found");
+        }
+
+        public void EditFile(string path)
+        {
+            if (Directory.Exists(path))
+            {
+                return;
+            }
+            //Process.Start(@"subl.exe", path);
+            Process.Start(@DefaultEdit, path);
         }
 
         public void OpenDir(string path)
@@ -141,14 +152,17 @@ namespace Total_Commander
             return Encoding.UTF8.GetString(bytes);
         }
 
-        public void Delete(string item)
+        public void Delete(string item, bool showDialog = true)
         {
             // @FIXME: delete recursive
-            Form4 frm = new Form4("Do you want to delete " + item + "?");
-            frm.ShowDialog();
-            if (frm.DialogResult != DialogResult.OK)
-            {
-                return;
+            if (showDialog)
+            { 
+                Dialog frm = new Dialog("Do you want to delete " + item + "?", "Delete", "Cancle");
+                frm.ShowDialog();
+                if (frm.DialogResult != DialogResult.OK)
+                {
+                    return;
+                }
             }
 
             string path = Path.Combine(CurrentDir.FullName, item);            
@@ -196,11 +210,11 @@ namespace Total_Commander
             return Move(src, dest);
         }
 
-        public void Copy(string src, string dest)
+        public bool Copy(string src, string dest)
         {
             if (src == dest)
             {
-                return;
+                return false;
             }
 
             if (File.Exists(src))
@@ -208,7 +222,7 @@ namespace Total_Commander
                 bool overwrite = false;
                 if (File.Exists(dest))
                 {
-                    var frm = new Form3("Copy from " + src + " To " + dest);
+                    var frm = new Dialog("Copy from " + src + " To " + dest, "Replace", "Skip");
                     frm.ShowDialog();
                     overwrite = frm.DialogResult == DialogResult.OK;
                     //if (frm.DialogResult == DialogResult.OK)
@@ -222,12 +236,21 @@ namespace Total_Commander
                 }
 
                 File.Copy(src, dest, overwrite);
-                return;
+                return true;
             }
 
             if (Directory.Exists(dest) == false)
             {
                 Directory.CreateDirectory(dest);
+            }
+            else
+            {
+                var frm = new Dialog("Do you want to merge folder?", "Merge", "Cancle");
+                frm.ShowDialog();
+                if (frm.DialogResult != DialogResult.OK)
+                {
+                    return false;
+                }
             }
 
             var files = Directory.GetFiles(src);
@@ -244,6 +267,8 @@ namespace Total_Commander
                 //MessageBox.Show(Path.Combine(dest, name));
                 Copy(f, Path.Combine(dest, name));
             }
+
+            return true;
         }
 
         public bool MoveTheSameDrive(string src, string dest)
@@ -277,8 +302,10 @@ namespace Total_Commander
                 return false;
             }
 
-            Copy(src, dest);
-            Delete(src);
+            if (Copy(src, dest))
+            {
+                Delete(src, false);
+            }
             return true;
         }
 

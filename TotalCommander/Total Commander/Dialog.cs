@@ -10,12 +10,14 @@ using System.Windows.Forms;
 
 namespace Total_Commander
 {
-    public partial class Form4 : Form
+    public partial class Dialog : Form
     {
-        public Form4(string info)
+        public Dialog(string msg, string okButtonText, string cancleButtonText)
         {
             InitializeComponent();
-            labelFileCopyInfo.Text = info;
+            textBox1.Text = msg;
+            button1.Text = okButtonText;
+            button2.Text = cancleButtonText;
         }
     }
 }
