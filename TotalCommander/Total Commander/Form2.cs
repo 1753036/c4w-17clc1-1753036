@@ -12,15 +12,22 @@ namespace Total_Commander
 {
     public partial class Form2 : Form
     {
-        public Form2(bool view = true)
+        public Form2(string label, bool view = true)
         {
             InitializeComponent();
+            textBox1.Text = label;
+
             richTextBoxView.ReadOnly = view;
         }
 
         public void SetText(string text)
         {
             richTextBoxView.Text = text;
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

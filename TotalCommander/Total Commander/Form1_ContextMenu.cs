@@ -20,6 +20,44 @@ namespace Total_Commander
             copyClipboard.Clear();
         }
 
+        private void DisableMenuItems()
+        {
+            foreach (ToolStripMenuItem item in contextMenu.Items)
+            {
+                item.Enabled = false;
+            }
+        }
+
+        private void EnableMenuItems()
+        {
+            foreach (ToolStripMenuItem item in contextMenu.Items)
+            {
+                item.Enabled = true;
+            }
+        }
+
+        private void contextMenu_Opened(object sender, EventArgs e)
+        {
+            EnableMenuItems();
+            contextMenu.Items[0].Enabled = false;
+            contextMenu.Items[1].Enabled = false;
+
+            if (currentListView.SelectedItems.Count == 0)
+            {
+                DisableMenuItems();
+                contextMenu.Items[4].Enabled = true;
+                contextMenu.Items[5].Enabled = true;
+            }
+            else if (currentListView.SelectedItems.Count == 1)
+            {
+                string path = Path.Combine(currentFileMan.CurrentDir.FullName, currentListView.SelectedItems[0].Text);
+                if (File.Exists(path))
+                {
+                    EnableMenuItems();
+                }
+            }
+        }
+
         private void renameContextMenu_Click(object sender, EventArgs e)
         {
             currentListView.SelectedItems[0].BeginEdit();
@@ -122,15 +160,11 @@ namespace Total_Commander
 
             string name = currentListView.SelectedItems[0].Text;
             string text = currentFileMan.ReadWholeFile(name);
-            if (text == "")
-            {
-                return;
-            }
-
-            Form2 f2 = new Form2();
-            f2.Text = name;
+            string path = Path.Combine(currentFileMan.CurrentDir.FullName, name);
+            Form2 f2 = new Form2(path);
+            f2.Text = path;
             f2.SetText(text);
-            f2.Show();
+            f2.ShowDialog();
         }
 
         private void editContextMenu_Click(object sender, EventArgs e)

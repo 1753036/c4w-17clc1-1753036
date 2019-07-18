@@ -233,7 +233,7 @@ namespace Total_Commander
                     }
                     else if (frm.DialogResult == DialogResult.Ignore)
                     {
-                        return true;
+                        return false;
                     }
                 }
 
@@ -293,9 +293,9 @@ namespace Total_Commander
                             overwrite = true;
                         }
                     }
-
-                    File.Copy(f, destPath, overwrite);
                 }
+
+                File.Copy(f, destPath, overwrite);
             }
 
             var folders = Directory.GetDirectories(src);

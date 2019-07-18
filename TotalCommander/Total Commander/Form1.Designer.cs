@@ -402,6 +402,7 @@
             this.renameContextMenu});
             this.contextMenu.Name = "mainMenu";
             this.contextMenu.Size = new System.Drawing.Size(155, 196);
+            this.contextMenu.Opened += new System.EventHandler(this.contextMenu_Opened);
             // 
             // viewContextMenu
             // 

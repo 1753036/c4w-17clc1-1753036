@@ -176,7 +176,7 @@ namespace Total_Commander
 
         private void lv_left_view_KeyUp(object sender, KeyEventArgs e)
         {
-            switch(e.KeyCode)
+            switch (e.KeyCode)
             {
                 case Keys.F3:
                     buttonViewF3_Click(sender, null);
