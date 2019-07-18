@@ -188,6 +188,7 @@ namespace Total_Commander
                     buttonCopyF5_Click(sender, null);
                     break;
                 case Keys.F6:
+                    Console.WriteLine("WTF");
                     buttonMoveF6_Click(sender, null);
                     break;
                 case Keys.F7:
@@ -198,6 +199,11 @@ namespace Total_Commander
                     break;
                 default: break;
             }
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            editContextMenu_Click(sender, e);
         }
     }
 }

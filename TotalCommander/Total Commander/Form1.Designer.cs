@@ -130,8 +130,9 @@
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.editToolStripMenuItem.Text = "Edit";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // copyToolStripMenuItem
             // 
@@ -476,6 +477,7 @@
             this.lv_right_view.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.ListView_AfterEdit);
             this.lv_right_view.DoubleClick += new System.EventHandler(this.ListView_DoubleClick);
             this.lv_right_view.Enter += new System.EventHandler(this.rightListView_Click);
+            this.lv_right_view.KeyUp += new System.Windows.Forms.KeyEventHandler(this.lv_left_view_KeyUp);
             // 
             // tableLayoutPanel5
             // 
