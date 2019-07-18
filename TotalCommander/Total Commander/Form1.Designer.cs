@@ -219,14 +219,14 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(125, 26);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem1
             // 
             this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(216, 26);
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(125, 26);
             this.helpToolStripMenuItem1.Text = "Help";
             this.helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
             // 
@@ -386,6 +386,7 @@
             this.lv_left_view.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.ListView_AfterEdit);
             this.lv_left_view.DoubleClick += new System.EventHandler(this.ListView_DoubleClick);
             this.lv_left_view.Enter += new System.EventHandler(this.leftListView_Click);
+            this.lv_left_view.KeyUp += new System.Windows.Forms.KeyEventHandler(this.lv_left_view_KeyUp);
             // 
             // contextMenu
             // 
@@ -685,7 +686,6 @@
             this.Name = "Form1";
             this.Text = "Total Commander";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyPress);
             this.mainMenuBar.ResumeLayout(false);
             this.mainMenuBar.PerformLayout();
             this.mainToolBar.ResumeLayout(false);

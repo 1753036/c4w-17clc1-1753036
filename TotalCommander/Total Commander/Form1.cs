@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Diagnostics;
 
 namespace Total_Commander
 {
@@ -162,11 +163,6 @@ namespace Total_Commander
             deleteContextMenu_Click(sender, e);
         }
 
-        private void Form1_KeyPress(object sender, KeyEventArgs e)
-        {
-            MessageBox.Show(e.KeyCode.ToString());
-        }
-
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var abt = new About();
@@ -175,7 +171,33 @@ namespace Total_Commander
 
         private void helpToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            Process.Start(Path.Combine(Directory.GetCurrentDirectory(), "help.pdf"));
+        }
 
+        private void lv_left_view_KeyUp(object sender, KeyEventArgs e)
+        {
+            switch(e.KeyCode)
+            {
+                case Keys.F3:
+                    buttonViewF3_Click(sender, null);
+                    break;
+                case Keys.F4:
+                    buttonEditF4_Click(sender, null);
+                    break;
+                case Keys.F5:
+                    buttonCopyF5_Click(sender, null);
+                    break;
+                case Keys.F6:
+                    buttonMoveF6_Click(sender, null);
+                    break;
+                case Keys.F7:
+                    buttonNewFolderF7_Click(sender, null);
+                    break;
+                case Keys.F8:
+                    buttonDeleteF8_Click(sender, null);
+                    break;
+                default: break;
+            }
         }
     }
 }
