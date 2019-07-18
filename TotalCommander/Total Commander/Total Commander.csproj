@@ -49,11 +49,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="About.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="About.Designer.cs">
+      <DependentUpon>About.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialog.Designer.cs">
       <DependentUpon>Dialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog2Item.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog2Item.Designer.cs">
+      <DependentUpon>Dialog2Item.cs</DependentUpon>
     </Compile>
     <Compile Include="DisplayHelper.cs" />
     <Compile Include="FileManager.cs" />
@@ -87,8 +99,14 @@
     <Compile Include="Form1_ToolBar.cs">
       <SubType>Form</SubType>
     </Compile>
+    <EmbeddedResource Include="About.resx">
+      <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialog.resx">
       <DependentUpon>Dialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog2Item.resx">
+      <DependentUpon>Dialog2Item.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

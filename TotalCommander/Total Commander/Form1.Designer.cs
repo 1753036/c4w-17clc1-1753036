@@ -45,6 +45,8 @@
             this.hiddenFIlesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.mainToolBar = new System.Windows.Forms.ToolStrip();
             this.tsb_view = new System.Windows.Forms.ToolStripButton();
             this.tsb_list = new System.Windows.Forms.ToolStripButton();
@@ -52,9 +54,9 @@
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.buttonDeleteF8 = new System.Windows.Forms.Button();
+            this.buttonNewFolderF7 = new System.Windows.Forms.Button();
+            this.buttonMoveF6 = new System.Windows.Forms.Button();
             this.lv_left_view = new System.Windows.Forms.ListView();
             this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewContextMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,9 +69,9 @@
             this.renameContextMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.lv_right_view = new System.Windows.Forms.ListView();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.buttonCopyF5 = new System.Windows.Forms.Button();
+            this.buttonEditF4 = new System.Windows.Forms.Button();
+            this.buttonViewF3 = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.leftComboBox = new System.Windows.Forms.ComboBox();
@@ -121,41 +123,41 @@
             // viewToolStripMenuItem
             // 
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
             this.viewToolStripMenuItem.Text = "View";
             this.viewToolStripMenuItem.Click += new System.EventHandler(this.viewContextMenu_Click);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
             this.editToolStripMenuItem.Text = "Edit";
             // 
             // copyToolStripMenuItem
             // 
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
             this.copyToolStripMenuItem.Text = "Copy";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyContextMenu_Click);
             // 
             // moveToolStripMenuItem
             // 
             this.moveToolStripMenuItem.Name = "moveToolStripMenuItem";
-            this.moveToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.moveToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
             this.moveToolStripMenuItem.Text = "Cut";
             this.moveToolStripMenuItem.Click += new System.EventHandler(this.moveContextMenu_Click);
             // 
             // newFolderToolStripMenuItem
             // 
             this.newFolderToolStripMenuItem.Name = "newFolderToolStripMenuItem";
-            this.newFolderToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.newFolderToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
             this.newFolderToolStripMenuItem.Text = "New Folder";
             this.newFolderToolStripMenuItem.Click += new System.EventHandler(this.newFolderContextMenu_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteContextMenu_Click);
             // 
@@ -165,7 +167,7 @@
             this.defaultTextEditorToolStripMenuItem,
             this.hiddenFIlesToolStripMenuItem});
             this.optionToolStripMenuItem.Name = "optionToolStripMenuItem";
-            this.optionToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.optionToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
             this.optionToolStripMenuItem.Text = "Option";
             // 
             // defaultTextEditorToolStripMenuItem
@@ -174,42 +176,59 @@
             this.notepadToolStripMenuItem,
             this.sublimeTextToolStripMenuItem});
             this.defaultTextEditorToolStripMenuItem.Name = "defaultTextEditorToolStripMenuItem";
-            this.defaultTextEditorToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.defaultTextEditorToolStripMenuItem.Size = new System.Drawing.Size(208, 26);
             this.defaultTextEditorToolStripMenuItem.Text = "Default Text Editor";
             // 
             // notepadToolStripMenuItem
             // 
             this.notepadToolStripMenuItem.Name = "notepadToolStripMenuItem";
-            this.notepadToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.notepadToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
             this.notepadToolStripMenuItem.Text = "Notepad";
             this.notepadToolStripMenuItem.Click += new System.EventHandler(this.notepadToolStripMenuItem_Click);
             // 
             // sublimeTextToolStripMenuItem
             // 
             this.sublimeTextToolStripMenuItem.Name = "sublimeTextToolStripMenuItem";
-            this.sublimeTextToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.sublimeTextToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
             this.sublimeTextToolStripMenuItem.Text = "Sublime Text";
             this.sublimeTextToolStripMenuItem.Click += new System.EventHandler(this.sublimeTextToolStripMenuItem_Click);
             // 
             // hiddenFIlesToolStripMenuItem
             // 
             this.hiddenFIlesToolStripMenuItem.Name = "hiddenFIlesToolStripMenuItem";
-            this.hiddenFIlesToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.hiddenFIlesToolStripMenuItem.Size = new System.Drawing.Size(208, 26);
             this.hiddenFIlesToolStripMenuItem.Text = "Hidden FIles";
             this.hiddenFIlesToolStripMenuItem.Click += new System.EventHandler(this.hiddenFIlesToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem,
+            this.helpToolStripMenuItem1});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
             this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem1
+            // 
+            this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(216, 26);
+            this.helpToolStripMenuItem1.Text = "Help";
+            this.helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
             // 
             // mainToolBar
             // 
@@ -297,9 +316,9 @@
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel6.Controls.Add(this.button6, 2, 0);
-            this.tableLayoutPanel6.Controls.Add(this.button5, 1, 0);
-            this.tableLayoutPanel6.Controls.Add(this.button4, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.buttonDeleteF8, 2, 0);
+            this.tableLayoutPanel6.Controls.Add(this.buttonNewFolderF7, 1, 0);
+            this.tableLayoutPanel6.Controls.Add(this.buttonMoveF6, 0, 0);
             this.tableLayoutPanel6.Location = new System.Drawing.Point(579, 341);
             this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
@@ -309,44 +328,47 @@
             this.tableLayoutPanel6.Size = new System.Drawing.Size(567, 57);
             this.tableLayoutPanel6.TabIndex = 3;
             // 
-            // button6
+            // buttonDeleteF8
             // 
-            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.buttonDeleteF8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button6.Location = new System.Drawing.Point(382, 4);
-            this.button6.Margin = new System.Windows.Forms.Padding(4);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(181, 49);
-            this.button6.TabIndex = 4;
-            this.button6.Text = "Delete (F8)";
-            this.button6.UseVisualStyleBackColor = true;
+            this.buttonDeleteF8.Location = new System.Drawing.Point(382, 4);
+            this.buttonDeleteF8.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonDeleteF8.Name = "buttonDeleteF8";
+            this.buttonDeleteF8.Size = new System.Drawing.Size(181, 49);
+            this.buttonDeleteF8.TabIndex = 4;
+            this.buttonDeleteF8.Text = "Delete (F8)";
+            this.buttonDeleteF8.UseVisualStyleBackColor = true;
+            this.buttonDeleteF8.Click += new System.EventHandler(this.buttonDeleteF8_Click);
             // 
-            // button5
+            // buttonNewFolderF7
             // 
-            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.buttonNewFolderF7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button5.Location = new System.Drawing.Point(193, 4);
-            this.button5.Margin = new System.Windows.Forms.Padding(4);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(181, 49);
-            this.button5.TabIndex = 3;
-            this.button5.Text = "New Folder (F7)";
-            this.button5.UseVisualStyleBackColor = true;
+            this.buttonNewFolderF7.Location = new System.Drawing.Point(193, 4);
+            this.buttonNewFolderF7.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonNewFolderF7.Name = "buttonNewFolderF7";
+            this.buttonNewFolderF7.Size = new System.Drawing.Size(181, 49);
+            this.buttonNewFolderF7.TabIndex = 3;
+            this.buttonNewFolderF7.Text = "New Folder (F7)";
+            this.buttonNewFolderF7.UseVisualStyleBackColor = true;
+            this.buttonNewFolderF7.Click += new System.EventHandler(this.buttonNewFolderF7_Click);
             // 
-            // button4
+            // buttonMoveF6
             // 
-            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.buttonMoveF6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.Location = new System.Drawing.Point(4, 4);
-            this.button4.Margin = new System.Windows.Forms.Padding(4);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(181, 49);
-            this.button4.TabIndex = 2;
-            this.button4.Text = "Move (F6)";
-            this.button4.UseVisualStyleBackColor = true;
+            this.buttonMoveF6.Location = new System.Drawing.Point(4, 4);
+            this.buttonMoveF6.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonMoveF6.Name = "buttonMoveF6";
+            this.buttonMoveF6.Size = new System.Drawing.Size(181, 49);
+            this.buttonMoveF6.TabIndex = 2;
+            this.buttonMoveF6.Text = "Move (F6)";
+            this.buttonMoveF6.UseVisualStyleBackColor = true;
+            this.buttonMoveF6.Click += new System.EventHandler(this.buttonMoveF6_Click);
             // 
             // lv_left_view
             // 
@@ -462,9 +484,9 @@
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.Controls.Add(this.button3, 2, 0);
-            this.tableLayoutPanel5.Controls.Add(this.button1, 1, 0);
-            this.tableLayoutPanel5.Controls.Add(this.button2, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.buttonCopyF5, 2, 0);
+            this.tableLayoutPanel5.Controls.Add(this.buttonEditF4, 1, 0);
+            this.tableLayoutPanel5.Controls.Add(this.buttonViewF3, 0, 0);
             this.tableLayoutPanel5.Location = new System.Drawing.Point(4, 341);
             this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
@@ -474,44 +496,47 @@
             this.tableLayoutPanel5.Size = new System.Drawing.Size(567, 57);
             this.tableLayoutPanel5.TabIndex = 2;
             // 
-            // button3
+            // buttonCopyF5
             // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.buttonCopyF5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Location = new System.Drawing.Point(382, 4);
-            this.button3.Margin = new System.Windows.Forms.Padding(4);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(181, 49);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "Copy (F5)";
-            this.button3.UseVisualStyleBackColor = true;
+            this.buttonCopyF5.Location = new System.Drawing.Point(382, 4);
+            this.buttonCopyF5.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonCopyF5.Name = "buttonCopyF5";
+            this.buttonCopyF5.Size = new System.Drawing.Size(181, 49);
+            this.buttonCopyF5.TabIndex = 3;
+            this.buttonCopyF5.Text = "Copy (F5)";
+            this.buttonCopyF5.UseVisualStyleBackColor = true;
+            this.buttonCopyF5.Click += new System.EventHandler(this.buttonCopyF5_Click);
             // 
-            // button1
+            // buttonEditF4
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.buttonEditF4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(193, 4);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(181, 49);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Edit (F4)";
-            this.button1.UseVisualStyleBackColor = true;
+            this.buttonEditF4.Location = new System.Drawing.Point(193, 4);
+            this.buttonEditF4.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonEditF4.Name = "buttonEditF4";
+            this.buttonEditF4.Size = new System.Drawing.Size(181, 49);
+            this.buttonEditF4.TabIndex = 2;
+            this.buttonEditF4.Text = "Edit (F4)";
+            this.buttonEditF4.UseVisualStyleBackColor = true;
+            this.buttonEditF4.Click += new System.EventHandler(this.buttonEditF4_Click);
             // 
-            // button2
+            // buttonViewF3
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.buttonViewF3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(4, 4);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(181, 49);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "View (F3)";
-            this.button2.UseVisualStyleBackColor = true;
+            this.buttonViewF3.Location = new System.Drawing.Point(4, 4);
+            this.buttonViewF3.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonViewF3.Name = "buttonViewF3";
+            this.buttonViewF3.Size = new System.Drawing.Size(181, 49);
+            this.buttonViewF3.TabIndex = 1;
+            this.buttonViewF3.Text = "View (F3)";
+            this.buttonViewF3.UseVisualStyleBackColor = true;
+            this.buttonViewF3.Click += new System.EventHandler(this.buttonViewF3_Click);
             // 
             // tableLayoutPanel2
             // 
@@ -660,6 +685,7 @@
             this.Name = "Form1";
             this.Text = "Total Commander";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyPress);
             this.mainMenuBar.ResumeLayout(false);
             this.mainMenuBar.PerformLayout();
             this.mainToolBar.ResumeLayout(false);
@@ -721,14 +747,16 @@
         private System.Windows.Forms.ToolStripMenuItem hiddenFIlesToolStripMenuItem;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button buttonCopyF5;
+        private System.Windows.Forms.Button buttonEditF4;
+        private System.Windows.Forms.Button buttonViewF3;
+        private System.Windows.Forms.Button buttonNewFolderF7;
+        private System.Windows.Forms.Button buttonMoveF6;
+        private System.Windows.Forms.Button buttonDeleteF8;
         private System.Windows.Forms.ToolStripMenuItem notepadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sublimeTextToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem1;
     }
 }
 

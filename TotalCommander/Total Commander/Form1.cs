@@ -113,5 +113,69 @@ namespace Total_Commander
             leftFileMan.DefaultEdit = "subl.exe";
             rightFileMan.DefaultEdit = "subl.exe";
         }
+
+        private void buttonViewF3_Click(object sender, EventArgs e)
+        {
+            viewContextMenu_Click(sender, e);
+        }
+
+        private void buttonEditF4_Click(object sender, EventArgs e)
+        {
+            editContextMenu_Click(sender, e);
+        }
+
+        private void buttonCopyF5_Click(object sender, EventArgs e)
+        {
+            FileManager nextFileMan = leftFileMan;
+            FileManager oldFileMan = currentFileMan;
+            if (currentFileMan == leftFileMan)
+            {
+                nextFileMan = rightFileMan;
+            }
+            copyContextMenu_Click(sender, e);
+            currentFileMan = nextFileMan;
+            pasteContextMenu_Click(sender, e);
+            currentFileMan = oldFileMan;
+        }
+
+        private void buttonMoveF6_Click(object sender, EventArgs e)
+        {
+            FileManager nextFileMan = leftFileMan;
+            FileManager oldFileMan = currentFileMan;
+            if (currentFileMan == leftFileMan)
+            {
+                nextFileMan = rightFileMan;
+            }
+            moveContextMenu_Click(sender, e);
+            currentFileMan = nextFileMan;
+            pasteContextMenu_Click(sender, e);
+            currentFileMan = oldFileMan;
+        }
+
+        private void buttonNewFolderF7_Click(object sender, EventArgs e)
+        {
+            newFolderContextMenu_Click(sender, e);
+        }
+
+        private void buttonDeleteF8_Click(object sender, EventArgs e)
+        {
+            deleteContextMenu_Click(sender, e);
+        }
+
+        private void Form1_KeyPress(object sender, KeyEventArgs e)
+        {
+            MessageBox.Show(e.KeyCode.ToString());
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var abt = new About();
+            abt.ShowDialog();
+        }
+
+        private void helpToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

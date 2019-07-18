@@ -103,6 +103,8 @@ namespace Total_Commander
             {
                 return;
             }
+            //path = path.Replace(" ", "\\ ");
+            Console.WriteLine(path);
             //Process.Start(@"subl.exe", path);
             Process.Start(@DefaultEdit, path);
         }
@@ -157,7 +159,7 @@ namespace Total_Commander
             // @FIXME: delete recursive
             if (showDialog)
             { 
-                Dialog frm = new Dialog("Do you want to delete " + item + "?", "Delete", "Cancle");
+                Dialog2Item frm = new Dialog2Item("Do you want to delete " + item + "?", "Delete", "Cancle");
                 frm.ShowDialog();
                 if (frm.DialogResult != DialogResult.OK)
                 {
@@ -210,7 +212,7 @@ namespace Total_Commander
             return Move(src, dest);
         }
 
-        public bool Copy(string src, string dest)
+        public bool Copy(string src, string dest, bool showMergeDialog = true)
         {
             if (src == dest)
             {
@@ -222,17 +224,17 @@ namespace Total_Commander
                 bool overwrite = false;
                 if (File.Exists(dest))
                 {
-                    var frm = new Dialog("Copy from " + src + " To " + dest, "Replace", "Skip");
+                    Dialog frm = new Dialog("Copy from " + src + " To " + dest);
                     frm.ShowDialog();
-                    overwrite = frm.DialogResult == DialogResult.OK;
-                    //if (frm.DialogResult == DialogResult.OK)
-                    //{
-                    //    File.Delete(dest);
-                    //}
-                    //else if (frm.DialogResult == DialogResult.Ignore)
-                    //{
-                    //    return;
-                    //}
+                    overwrite = frm.DialogResult == DialogResult.Yes || frm.DialogResult == DialogResult.OK;
+                    if (frm.DialogResult == DialogResult.Cancel)
+                    {
+                        return false;
+                    }
+                    else if (frm.DialogResult == DialogResult.Ignore)
+                    {
+                        return true;
+                    }
                 }
 
                 File.Copy(src, dest, overwrite);
@@ -245,19 +247,55 @@ namespace Total_Commander
             }
             else
             {
-                var frm = new Dialog("Do you want to merge folder?", "Merge", "Cancle");
-                frm.ShowDialog();
-                if (frm.DialogResult != DialogResult.OK)
+                if (showMergeDialog == true)
                 {
-                    return false;
+                    var frm = new Dialog2Item("Do you want to merge folder from" + src + " To " + dest + "?", "Merge", "Cancle");
+                    frm.ShowDialog();
+                    if (frm.DialogResult != DialogResult.OK)
+                    {
+                        return false;
+                    }
+                    else if (frm.DialogResult == DialogResult.OK)
+                    {
+                        showMergeDialog = false;
+                    }
                 }
             }
 
             var files = Directory.GetFiles(src);
+            bool overwriteall = false;
             foreach (var f in files)
             {
+                bool overwrite = overwriteall;
                 string name = Path.GetFileName(f);
-                Copy(f, Path.Combine(dest, name));
+                string destPath = Path.Combine(dest, name);
+                if (File.Exists(destPath))
+                {
+                    if (overwriteall == false)
+                    {
+                        Dialog frm = new Dialog("Copy from " + src + " To " + dest);
+                        frm.ShowDialog();
+                        if (frm.DialogResult == DialogResult.Cancel)
+                        {
+                            break;
+                        }
+                        else if (frm.DialogResult == DialogResult.Ignore)
+                        {
+                            continue;
+                        }
+                        else if (frm.DialogResult == DialogResult.Yes)
+                        {
+                            overwrite = true;
+                        }
+                        else if (frm.DialogResult == DialogResult.OK)
+                        {
+                            overwriteall = true;
+                            overwrite = true;
+                        }
+                    }
+
+                    File.Copy(f, destPath, overwrite);
+                }
             }
 
             var folders = Directory.GetDirectories(src);
@@ -265,7 +303,7 @@ namespace Total_Commander
             {
                 string name = Path.GetFileName(f);
                 //MessageBox.Show(Path.Combine(dest, name));
-                Copy(f, Path.Combine(dest, name));
+                Copy(f, Path.Combine(dest, name), showMergeDialog);
             }
 
             return true;

@@ -10,12 +10,16 @@ using System.Windows.Forms;
 
 namespace Total_Commander
 {
-    public partial class Dialog : Form
+    public partial class About : Form
     {
-        public Dialog(string msg)
+        public About()
         {
             InitializeComponent();
-            textBox1.Text = msg;
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
