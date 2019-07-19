@@ -16,6 +16,8 @@ namespace Total_Commander
         public DirectoryInfo CurrentDir;
         public DriveInfo CurrentDrive;
         private bool showHidden = false;
+        private bool replaceAll = false;
+        private bool skipAll = false;
         public string DefaultEdit = "notepad.exe";
 
         public FileManager()
@@ -174,18 +176,6 @@ namespace Total_Commander
                 return;
             }
 
-            //var files = Directory.GetFiles(path);
-            //foreach (var f in files)
-            //{
-            //    File.Delete(f);
-            //}
-
-            //var folders = Directory.GetDirectories(path);
-            //foreach (var f in folders)
-            //{
-            //    Delete(f);
-            //}
-
             Directory.Delete(path, true);
         }
 
@@ -212,139 +202,113 @@ namespace Total_Commander
             return Move(src, dest);
         }
 
-        public bool Copy(string src, string dest, bool showMergeDialog = true)
+        public bool Copy(string src, string dest)
         {
+            Console.WriteLine($"{src} TO {dest}");
+            DialogResult result = DialogResult.Abort;
             if (src == dest)
             {
                 return false;
+            }
+
+            if (!replaceAll && (File.Exists(dest) || Directory.Exists(dest)))
+            {
+                Dialog dialog = new Dialog("File or Directory conflict: " + src + " & " + dest);
+                dialog.ShowDialog();
+                result = dialog.DialogResult;
+            }
+
+            if (Directory.Exists(src) && Directory.Exists(dest) == false)
+                Directory.CreateDirectory(dest);
+
+            switch (result)
+            {
+                case DialogResult.OK:
+                    replaceAll = true;
+                    break;
+                case DialogResult.Yes:
+                    break;
+                case DialogResult.Ignore:
+                    return false;
+                case DialogResult.Cancel:
+                    skipAll = true;
+                    break;
             }
 
             if (File.Exists(src))
             {
-                bool overwrite = false;
-                if (File.Exists(dest))
-                {
-                    Dialog frm = new Dialog("Copy from " + src + " To " + dest);
-                    frm.ShowDialog();
-                    overwrite = frm.DialogResult == DialogResult.Yes || frm.DialogResult == DialogResult.OK;
-                    if (frm.DialogResult == DialogResult.Cancel)
-                    {
-                        return false;
-                    }
-                    else if (frm.DialogResult == DialogResult.Ignore)
-                    {
-                        return false;
-                    }
-                }
-
-                File.Copy(src, dest, overwrite);
+                File.Copy(src, dest, true);
                 return true;
             }
 
-            if (Directory.Exists(dest) == false)
+            string[] filepaths = Directory.GetFiles(src);
+            bool copied = true;
+            foreach (string path in filepaths)
             {
-                Directory.CreateDirectory(dest);
-            }
-            else
-            {
-                if (showMergeDialog == true)
+                if (skipAll == false)
                 {
-                    var frm = new Dialog2Item("Do you want to merge folder from" + src + " To " + dest + "?", "Merge", "Cancle");
-                    frm.ShowDialog();
-                    if (frm.DialogResult != DialogResult.OK)
-                    {
-                        return false;
-                    }
-                    else if (frm.DialogResult == DialogResult.OK)
-                    {
-                        showMergeDialog = false;
-                    }
+                    string filename = Path.GetFileName(path);
+                    copied = copied && Copy(Path.Combine(src, filename), Path.Combine(dest, filename));
                 }
             }
 
-            var files = Directory.GetFiles(src);
-            bool overwriteall = false;
-            foreach (var f in files)
+            string[] folderpahts = Directory.GetDirectories(src);
+            foreach (string path in folderpahts)
             {
-                bool overwrite = overwriteall;
-                string name = Path.GetFileName(f);
-                string destPath = Path.Combine(dest, name);
-                if (File.Exists(destPath))
+                if (skipAll == false)
                 {
-                    if (overwriteall == false)
-                    {
-                        Dialog frm = new Dialog("Copy from " + src + " To " + dest);
-                        frm.ShowDialog();
-                        if (frm.DialogResult == DialogResult.Cancel)
-                        {
-                            break;
-                        }
-                        else if (frm.DialogResult == DialogResult.Ignore)
-                        {
-                            continue;
-                        }
-                        else if (frm.DialogResult == DialogResult.Yes)
-                        {
-                            overwrite = true;
-                        }
-                        else if (frm.DialogResult == DialogResult.OK)
-                        {
-                            overwriteall = true;
-                            overwrite = true;
-                        }
-                    }
+                    string filename = Path.GetFileName(path);
+                    copied = copied && Copy(Path.Combine(src, filename), Path.Combine(dest, filename));
                 }
-
-                File.Copy(f, destPath, overwrite);
             }
 
-            var folders = Directory.GetDirectories(src);
-            foreach (var f in folders)
-            {
-                string name = Path.GetFileName(f);
-                //MessageBox.Show(Path.Combine(dest, name));
-                Copy(f, Path.Combine(dest, name), showMergeDialog);
-            }
-
-            return true;
+            return copied;
         }
 
-        public bool MoveTheSameDrive(string src, string dest)
+        public void CopyListFiles(string srcDir, string destDir, List<string> list)
         {
-            if (Directory.Exists(src) && !Directory.Exists(dest))
-            {
-                Directory.Move(src, dest);
-                return true;
-            }
+            replaceAll = false;
+            skipAll = false;
 
-            if (File.Exists(src) && !File.Exists(dest))
+            foreach (var item in list)
             {
-                try
+                if (skipAll)
                 {
-                    File.Move(src, dest);
+                    break;
                 }
-                catch
-                {
-                    MessageBox.Show("Permission denied!");
-                }
-                return true;
-            }
 
-            return false;
+                string src = Path.Combine(srcDir, item);
+                string dest = Path.Combine(destDir, item);
+                Copy(src, dest);
+            }
         }
 
         public bool Move(string src, string dest)
         {
-            if (src == dest)
-            {
-                return false;
-            }
-
-            if (Copy(src, dest))
+            if (Copy(src, dest) && skipAll == false)
             {
                 Delete(src, false);
+                return true;
             }
-            return true;
+            return false;
+        }
+
+        public void MoveListFiles(string srcDir, string destDir, List<string> list)
+        {
+            replaceAll = false;
+            skipAll = false;
+
+            foreach (var item in list)
+            {
+                if (skipAll)
+                {
+                    break;
+                }
+
+                string src = Path.Combine(srcDir, item);
+                string dest = Path.Combine(destDir, item);
+                Move(src, dest);
+            }
         }
 
         public DirectoryInfo[] GetDirectories()

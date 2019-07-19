@@ -113,38 +113,37 @@ namespace Total_Commander
 
         private void pasteContextMenu_Click(object sender, EventArgs e)
         {
-            // @FIXME
             if (cutClipboard.Count >= 1)
             {
                 string srcDir = cutClipboard[0];
                 string destDir = currentFileMan.CurrentDir.FullName;
+                List<string> items = new List<string>();
 
                 foreach (var item in cutClipboard)
                 {
                     if (item != srcDir)
                     {
-                        string src = Path.Combine(srcDir, item);
-                        string dest = Path.Combine(destDir, item);
-                        //MessageBox.Show(src + " Move to " + dest);
-                        currentFileMan.Move(src, dest);
+                        items.Add(item);
                     }
                 }
+
+                currentFileMan.MoveListFiles(srcDir, destDir, items);
             }
             else if (copyClipboard.Count >= 1)
             {
                 string srcDir = copyClipboard[0];
                 string destDir = currentFileMan.CurrentDir.FullName;
+                List<string> items = new List<string>();
 
                 foreach (var item in copyClipboard)
                 {
                     if (item != srcDir)
                     {
-                        string src = Path.Combine(srcDir, item);
-                        string dest = Path.Combine(destDir, item);
-                        //MessageBox.Show(src + " Copy to " + dest);
-                        currentFileMan.Copy(src, dest);
+                        items.Add(item);
                     }
                 }
+
+                currentFileMan.CopyListFiles(srcDir, destDir, items);
             }
 
             ClearClipboard();
