@@ -385,6 +385,7 @@
             this.lv_left_view.UseCompatibleStateImageBehavior = false;
             this.lv_left_view.View = System.Windows.Forms.View.Details;
             this.lv_left_view.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.ListView_AfterEdit);
+            this.lv_left_view.BeforeLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.ListView_BeforeEdit);
             this.lv_left_view.DoubleClick += new System.EventHandler(this.ListView_DoubleClick);
             this.lv_left_view.Enter += new System.EventHandler(this.leftListView_Click);
             this.lv_left_view.KeyUp += new System.Windows.Forms.KeyEventHandler(this.lv_left_view_KeyUp);
@@ -559,7 +560,7 @@
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1306, 62);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1150, 62);
             this.tableLayoutPanel2.TabIndex = 6;
             // 
             // tableLayoutPanel3
@@ -611,7 +612,7 @@
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 69.71831F));
             this.tableLayoutPanel4.Controls.Add(this.rightComboBox, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.rightLabelInfo, 1, 0);
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(653, 0);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(575, 0);
             this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
@@ -653,7 +654,7 @@
             this.leftAddressBar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.leftAddressBar.Name = "leftAddressBar";
             this.leftAddressBar.ReadOnly = true;
-            this.leftAddressBar.Size = new System.Drawing.Size(647, 22);
+            this.leftAddressBar.Size = new System.Drawing.Size(569, 22);
             this.leftAddressBar.TabIndex = 2;
             this.leftAddressBar.MouseClick += new System.Windows.Forms.MouseEventHandler(this.AddressBar_Click);
             this.leftAddressBar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.leftAddressBar_KeyDown);
@@ -664,11 +665,11 @@
             this.rightAddressBar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.rightAddressBar.Location = new System.Drawing.Point(656, 33);
+            this.rightAddressBar.Location = new System.Drawing.Point(578, 33);
             this.rightAddressBar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.rightAddressBar.Name = "rightAddressBar";
             this.rightAddressBar.ReadOnly = true;
-            this.rightAddressBar.Size = new System.Drawing.Size(647, 22);
+            this.rightAddressBar.Size = new System.Drawing.Size(569, 22);
             this.rightAddressBar.TabIndex = 3;
             this.rightAddressBar.MouseClick += new System.Windows.Forms.MouseEventHandler(this.AddressBar_Click);
             this.rightAddressBar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.rightAddressBar_KeyDown);

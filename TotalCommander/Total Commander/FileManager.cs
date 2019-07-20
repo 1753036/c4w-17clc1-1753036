@@ -202,9 +202,10 @@ namespace Total_Commander
             return Move(src, dest);
         }
 
-        public bool Copy(string src, string dest)
+        public bool Copy(string src, string dest, bool deleted = false)
         {
-            Console.WriteLine($"{src} TO {dest}");
+            Console.WriteLine($"Deleted {deleted}");
+            bool copied = true;
             DialogResult result = DialogResult.Abort;
             if (src == dest)
             {
@@ -219,7 +220,10 @@ namespace Total_Commander
             }
 
             if (Directory.Exists(src) && Directory.Exists(dest) == false)
+            {
+                Console.WriteLine("Make Folder " + dest);
                 Directory.CreateDirectory(dest);
+            }
 
             switch (result)
             {
@@ -229,6 +233,7 @@ namespace Total_Commander
                 case DialogResult.Yes:
                     break;
                 case DialogResult.Ignore:
+                    Console.WriteLine("Skip " + src + " - " + dest);
                     return false;
                 case DialogResult.Cancel:
                     skipAll = true;
@@ -237,29 +242,45 @@ namespace Total_Commander
 
             if (File.Exists(src))
             {
+                Console.WriteLine($"Copy File FROM {src} TO {dest}");
                 File.Copy(src, dest, true);
+                if (deleted)
+                {
+                    Console.WriteLine("Delete " + src);
+                    File.Delete(src);
+                }
                 return true;
             }
 
-            string[] filepaths = Directory.GetFiles(src);
-            bool copied = true;
+            Console.WriteLine($"Copy Folder FROM {src} TO {dest}");
+            string[] filepaths = Directory.GetDirectories(src);
             foreach (string path in filepaths)
             {
                 if (skipAll == false)
                 {
                     string filename = Path.GetFileName(path);
-                    copied = copied && Copy(Path.Combine(src, filename), Path.Combine(dest, filename));
+                    copied = copied & Copy(Path.Combine(src, filename), Path.Combine(dest, filename), deleted);
                 }
             }
 
-            string[] folderpahts = Directory.GetDirectories(src);
-            foreach (string path in folderpahts)
+            filepaths = Directory.GetFiles(src);
+            foreach (string path in filepaths)
             {
                 if (skipAll == false)
                 {
                     string filename = Path.GetFileName(path);
-                    copied = copied && Copy(Path.Combine(src, filename), Path.Combine(dest, filename));
+                    copied = copied & Copy(Path.Combine(src, filename), Path.Combine(dest, filename), deleted);
                 }
+            }
+
+            try
+            {
+                Console.WriteLine("Try Delete Folder " + src);
+                Directory.Delete(src);
+            }
+            catch
+            {
+                
             }
 
             return copied;
@@ -285,12 +306,7 @@ namespace Total_Commander
 
         public bool Move(string src, string dest)
         {
-            if (Copy(src, dest) && skipAll == false)
-            {
-                Delete(src, false);
-                return true;
-            }
-            return false;
+            return Copy(src, dest, true) & skipAll == false;
         }
 
         public void MoveListFiles(string srcDir, string destDir, List<string> list)

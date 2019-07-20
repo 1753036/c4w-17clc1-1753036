@@ -121,7 +121,7 @@ namespace Total_Commander
 
                 foreach (var item in cutClipboard)
                 {
-                    if (item != srcDir)
+                    if (item != srcDir && item != "..")
                     {
                         items.Add(item);
                     }
@@ -137,7 +137,7 @@ namespace Total_Commander
 
                 foreach (var item in copyClipboard)
                 {
-                    if (item != srcDir)
+                    if (item != srcDir && item != "..")
                     {
                         items.Add(item);
                     }

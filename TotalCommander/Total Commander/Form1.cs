@@ -205,5 +205,13 @@ namespace Total_Commander
         {
             editContextMenu_Click(sender, e);
         }
+
+        private void ListView_BeforeEdit(object sender, LabelEditEventArgs e)
+        {
+            if (currentListView.SelectedItems[0].Text == "..")
+            {
+                e.CancelEdit = true;
+            }
+        }
     }
 }
